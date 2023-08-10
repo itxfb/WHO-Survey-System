@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Survey Response";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+    int i = 0;
+    int j = 1;
+}
+
+<style>
+    .inpStyling {
+        border-width: 2px;
+        border-radius: 10px;
+        border-style: solid !important;
+        color: #999999;
+        width: 80%;
+    }
+</style>
+
+<!-- SECTION TITLE -->
+<div class="row">
+    <div class="col-lg-10 offset-lg-1 section-title">
+
+        <!-- Title 	-->
+        <h3 class="h3-md text-center">Diagnostic Survey of Institutional Culture</h3>
+
+        <!-- Horizintal line -->
+        <hr class="thankyou mt-5" style="width:50%;">
+    </div>
+</div>
+<div class="row m-5" style=" border:2px solid #424ef4; border-radius:10px;">
+    <div class="col-xs-12" style="background-color:#fff; border-radius:10px;">
+        <div class="row" style="padding:15px;">
+            @{ 
+                i = 0;
+            }
+            @foreach (var item in ViewBag.Survey)
+            {
+                //if (i != 9)
+                if (i != ViewBag.SurveyCounts)
+                {
+                    <h5 class="h5-lg">@j. @item.Key</h5>
+
+                    for (var k = 0; k < 4; k++)
+                    {
+                        <div class="col-md-8 col-lg-8" style="padding: 20px;padding-top:20px;">
+                            <p>@Convert.ToChar(k + 65). @item.Value[k]</p>
+                        </div>
+                        <div class="col-md-4 col-lg-4" style="padding: 20px;padding-top:20px;">
+                            @{
+                                string x = ViewBag.surveyRes[i][k];
+                                if (string.IsNullOrEmpty(x))
+                                {
+                                    <input type="text" class="form-control inpStyling" value="" disabled>
+                                }
+                                else
+                                {
+                                    <input type="text" class="form-control inpStyling" value="@ViewBag.surveyRes[i][k]" disabled>
+                                }
+                            }
+                        </div>
+                    }
+                    <div class="row mb-3 m-5" style="align-items: baseline;">
+                        <div class="col-md-8 col-lg-8" style="padding: 20px;padding-top:20px;">
+                            <p class="d-flex justify-content-start justify-content-md-end"><b>TOTAL SCORE : </b></p>
+                        </div>
+                        <div class="col-md-4 col-lg-4" style="padding: 20px;padding-top:20px;">
+                            <span><input type="text" value="100" class="form-control inpStyling ttl_@i" disabled></span>
+                        </div>
+                    </div>
+                    i++;
+                    j++;
+                }
+                else
+                {
+                    <div class="quiz-border p-4 mt-3">
+                        <!-- Plan Title  -->
+                        <h3 class="h5-lg cat">@item.Key :</h3>
+
+                        <h5 class="h5-lg pt-4">1. @item.Value[0]</h5>
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div id="input-message" class="col-md-12 input-message p-0">
+                                    <textarea class="form-control message openEnd" rows="6" style="width:93%;" disabled>@ViewBag.surveyRes[i][0].ToString()</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="h5-lg pt-4">2. @item.Value[1]</h5>
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div id="input-message" class="col-md-12 input-message p-0">
+                                    <textarea class="form-control message openEnd" rows="6" style="width:93%;" disabled>@ViewBag.surveyRes[i][1].ToString()</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

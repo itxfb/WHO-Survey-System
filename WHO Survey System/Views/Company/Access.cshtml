@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Access";
+    Layout = "~/Views/Shared/_LandingPageLayout.cshtml";
+}
+
+<style>
+    .badge a {
+        color: #fff !important;
+    }
+</style>
+
+
+<section id="hero-6" class="bg-scroll division mt-5" style="padding-top:165px !important; padding-bottom:100px !important;">
+    <div class="container white-color" style="margin-top:-75px!important;">
+        <div class="row d-flex align-items-center">
+            @*@if (ViewBag.Email == "")
+            {
+                <p class="mb-5" align="center" style="font-size:18px;">
+                    To participate in the survey, please input your organization-based email address. The survey platform will automatically generate a random passcode and send it to your email account. Email addresses are not recorded or associated with survey results.
+                </p>
+            }*@
+
+        <div class="col-md-6">
+
+            <div class="hero-txt mb-40">
+
+                <a href="https://www.deiready.com" target="_blank">
+
+                    <img class="mb-4 who-logo" src="~/Content/landingPage_Files/images/logo-who.png">
+                    @*<img class="mb-4 who-logo"  src="@Model.CompanyLogo"><br />*@
+
+                </a>
+
+                @if (ViewBag.Email == "")
+                {
+                    <p class="mb-5 justify-content-center justify-content-between" style="font-size:18px;">
+                        To participate in the survey, please input your organization-based email address. The survey platform will automatically generate a random passcode and send it to your email account. Email addresses are not recorded or associated with survey results.
+                    </p>
+                }
+                else
+                {
+
+
+                    <p class="mb-5 justify-content-center justify-content-between" style="font-size:18px;">
+                        The survey platform will send a unique passcode to your email account. This may take up to one or two minutes then enter your passcode to proceed further.
+
+                    </p>
+
+                }
+
+            </div>
+
+
+        </div>
+
+
+            <!-- HERO FORM -->
+            <div class="col-md-6">
+                <div class="hero-form text-center mb-40">
+                    @if (ViewBag.Email == "")
+                    {
+                        <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                            @if (ViewBag.msg != null && ViewBag.msg != "")
+                            {
+                                <strong><b>@ViewBag.msg</b></strong>
+                            }
+                        </div>
+
+                        <form class="row bg-blue quick-form" method="post" action="@Url.Action("Access", "Company")">
+                                
+                            <div class="col-md-12">
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Enter Your Valid Email</h4>
+                            </div>
+                            @if(ViewBag.CompanyId != null)
+                            {
+                                <input type="hidden" name="Id" value="@ViewBag.CompanyId" />
+                            }
+                            <label>Email : </label>
+                            <div id="" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <span><input type="email" name="Email" class="form-control" id="email" placeholder="Enter email here" required></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="hidden" value="English" id="lang" />
+                                <button type="submit" class="btn btn-md btn-theme tra-hover">NEXT</button>
+                            </div>
+
+                        </form>
+
+                        <p class="mt-4 ml-4" align="center">
+                            <h4>
+                                <span style="font-size:16px; font-weight:300;">
+                                    For more information regarding confidentiality
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Click Here
+                                    </a>
+                                </span>
+                            </h4>
+                        </p>
+                    }
+                    else
+                    {
+                        <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+                            <div class="col-md-12">
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Enter Valid Passcode</h4>
+                            </div>
+
+                            <p>The survey platform will send a unique passcode to your email account. This may take up to one or two minutes.</p>
+                            <label>Passcode : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Enter passcode here" required></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="hidden" value="@ViewBag.CompanyId" name="Id" />
+                                <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                <input type="hidden" value="English" name="Lang" />
+                                <button type="submit" class="btn btn-md btn-theme tra-hover">NEXT</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+
+            @*<div class="col-md-3"></div>*@
+
+            <!--Confidential Modal Start-->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Confidentiality Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body" style="height: auto;">
+                            <p align="justify" style="color:#000 !important;">
+                                This survey is administered by DEI Ready. The survey does not record personal details. All responses to the survey
+                                will remain strictly anonymous and confidential and will be aggregated to construct a snapshot of the organizational culture
+                                at your organization.
+                            </p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+
+    $('#alertMsg').fadeOut(7000);
+
+    //$('#btnclck').click(function () {
+    //    var getvalidate = document.getElementById("surveyform").reportValidity();
+    //    var email = document.getElementById("email").value.toLowerCase();
+    //    //var pas = document.getElementById("passcode");
+    //    var lan = document.getElementById("lang").value;
+    //    //var passcode = "";
+
+
+    //    //if (pas != null) {
+    //    //    passcode = pas.value;
+    //    //}
+
+    //    console.log(lan);
+    //    if (getvalidate == true) {
+    //        window.open('../Company/Access?Email=' + email);
+    //    }
+
+    //    //var SurveyId = document.getElementById("SurveyId").value;
+    //    //var RecpID = document.getElementById("RecpID").value;
+
+
+    //    //if (email.includes("gmail.com")) {
+    //    //    window.open('../Home/Index?Email=' + email + '&Passcode=' + passcode, "_parent");
+    //    //}
+    //    //else {
+    //    //    alert("Invalid Email. Please enter the valid WHO email and try again!");
+    //    //}
+    //});
+
+
+    if ($("#lang").val() == "Chinese") {
+
+        document.body.style.fontFamily = "Microsoft YaHei";
+    }
+
+
+</script>

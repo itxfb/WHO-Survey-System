@@ -1,0 +1,35 @@
+DateTime: 5/3/2023 12:57 PM---------------- Company Name: My log company ------------------------ Company Url: https://localhost:44393/survey/mylogcompany ------------------------ Company Survey Categories: 3
+DateTime: 5/3/2023 1:04 PM---------------- Company Name: My Nodlays company ------------------------ Company Url: https://localhost:44393/survey/mynodlayscompany ------------------------ Company Survey Categories: 3
+DateTime: 5/3/2023 1:18 PM---------------- Company Id: 48 ------------------------ Survey Title: MY Psu Survey
+DateTime: 5/3/2023 1:30 PM---------------- Company Id: 48 ------------------------ Company Name: My Nodlays company ------------------------ Company Url: https://localhost:44393/survey/mynodlayscompany ------------------------ Company Landing Page Data: <p>Test&nbsp;</p>
+ ------------------------ Company Demo Graphic Data: 
+DateTime: 5/3/2023 1:35 PM---------------- Company Id: 48 ------------------------ Company Name: My Nodlays company ------------------------ Company Url: https://localhost:44393/survey/mynodlayscompany ------------------------ Company Landing Page Data: <p>Test&nbsp;</p>
+ ------------------------ Company Demo Graphic Data: <p>language</p>
+
+DateTime: 5/3/2023 2:50 PM---------------- Company Id: 18 ------------------------ Company Name: My log company ------------------------ Company Url: https://localhost:44393/survey/mylogcompany ------------------------ Company Landing Page Data: <p>Test landing language</p>
+ ------------------------ Company Demo Graphic Data: <p>language</p>
+
+DateTime: 5/3/2023 2:50 PM---------------- Company Id: 18 ------------------------ Company Name: My log company ------------------------ Company Url: https://localhost:44393/survey/mylogcompany ------------------------ Company Landing Page Data: <p>Test landing language</p>
+ ------------------------ Company Demo Graphic Data: <p>language</p>
+
+DateTime: 5/3/2023 2:56 PM---------------- Company Id: 6 ------------------------ Company Name: PSUtest4 ------------------------ Company Url: https://dsicsurvey.com/survey/psutest4 ------------------------ Company Landing Page Data: <h3>Welcome to the Diagnostic Survey of Institutional Culture&nbsp;</h3>
+
+<p>The survey is intended to provide a better understanding of the cultural characteristics present at your organization.&nbsp;</p>
+
+<p>All participants will remain anonymous. After clicking &ldquo;Next&rdquo; in the box to the right, you will be asked to enter your email address to receive a two-factor authentication code. The code is used to enter the survey platform and ensures anonymity of participants.&nbsp;</p>
+
+<p>Prior to beginning the survey, you will be asked to enter demographic data. If you have any questions or need assistance, please contact&nbsp;<a href="mailto:survey@deiready.com">survey@deiready.com</a></p>
+ ------------------------ Company Demo Graphic Data: <h3>Demographics Page</hDateTime: 5/3/2023 3:11 PM---------------- Company Id: 6 ------------------------ Company Name: PSUtest4 ------------------------ Company Url: https://dsicsurvey.com/survey/psutest4 ------------------------ Company Landing Page Data: <h3>Welcome to the Diagnostic Survey of Institutional Culture&nbsp;</h3>
+
+<p>The survey is intended to provide a better understanding of the cultural characteristics present at your organization.&nbsp;</p>
+
+<p>All participants will remain anonymous. After clicking &ldquo;Next&rdquo; in the box to the right, you will be asked to enter your email address to receive a two-factor authentication code. The code is used to enter the survey platform and ensures anonymity of participants.&nbsp;</p>
+
+<p>Prior to beginning the survey, you will be asked to enter demographic data. If you have any questions or need assistance, please contact&nbsp;<a href="mailto:survey@deiready.com">survey@deiready.com</a></p>
+ ------------------------ Company Demo Graphic Data: <h3>Demographics Page</hDateTime: 5/3/2023 7:09 PM---------------- Company Name: this company ------------------------ Company Url: https://localhost:44393/survey/thiscompany ------------------------ Company Survey Categories: 2
+DateTime: 5/3/2023 7:10 PM---------------- Company Id: 0 ------------------------ Company Name:  ------------------------ Company Url: 
+DateTime: 5/3/2023 7:11 PM---------------- Company Id: 0 ------------------------ Company Name:  ------------------------ Company Url: 
+DateTime: 5/3/2023 9:42 PM---------------- Company Name: Test QA Company ------------------------ Company Url: https://localhost:44393/survey/testqacompany ------------------------ Company Survey Categories: 4
+DateTime: 5/3/2023 9:45 PM---------------- Company Id: 26 ------------------------ Survey Title: Qa Survey Title
+DateTime: 5/3/2023 9:46 PM---------------- Company Id: 26 ------------------------ Company Name: Test QA Company ------------------------ Company Url: https://localhost:44393/survey/testqacompany
+DateTime: 5/3/2023 10:00 PM---------------- Company Id: 26 ------------------------ Company Name: Test QA Company ------------------------ Company Url: https://localhost:44393/survey/testqacompany

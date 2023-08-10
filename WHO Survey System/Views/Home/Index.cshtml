@@ -1,0 +1,911 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LandingPageLayout.cshtml";
+    //ViewBag.lang = ProjectVariables.lang;
+
+    //Get Cookies And Its Value
+    HttpCookie myCookie = Request.Cookies["LanguageCookie"];
+    if (myCookie != null)
+    {
+        ViewBag.lang = myCookie["lang"];
+    }
+}
+
+<style>
+    .badge a {
+        color: #fff !important;
+    }
+</style>
+
+
+<!-- HERO-6
+============================================= -->
+<section id="hero-6" class="bg-scroll division mt-5" style="padding-top:165px !important; padding-bottom:100px !important;">
+    <div class="container white-color">
+        <div class="row d-flex align-items-center">
+            @if (ViewBag.Email == "")
+            {
+                if (ViewBag.lang == "" || ViewBag.lang == "English")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        To participate in the survey, please input your official WHO or PAHO email address.
+                        The survey platform will automatically generate a random passcode and send it to your WHO or PAHO email account.
+                        Email addresses are not recorded or associated with survey results.
+                    </p>
+                }
+                if (ViewBag.lang == "Portuguese")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Para participar no inquérito, introduza o seu endereço de e-mail oficial da OMS ou OPAS.
+                        A plataforma do inquérito gera automaticamente um código de acesso aleatório e envia-o para a sua conta de e-mail da OMS ou OPAS.
+                        Os endereços de e-mail não são guardados nem associados aos resultados do inquérito.
+                    </p>
+                }
+                if (ViewBag.lang == "Spanish")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Para participar en la encuesta, introduzca su dirección de correo electrónico oficial de la OMS o la OPS.
+                        La plataforma de encuestas generará automáticamente un código de acceso aleatorio y se lo enviará a su cuenta de correo electrónico de la OMS o la OPS.
+                        Las direcciones de correo electrónico no se registran ni asocian a los resultados de la encuesta.
+                    </p>
+                }
+                if (ViewBag.lang == "French")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Pour participer à l’enquête, veuillez saisir votre adresse e-mail officielle de l’OMS ou de l’OPS.
+                        La plateforme d’enquête génère automatiquement un code d’accès aléatoire et l’envoie à votre compte de messagerie OMS ou OPS.
+                        Les adresses e-mail ne sont pas enregistrées ni associées aux résultats de l’enquête.
+                    </p>
+                }
+                if (ViewBag.lang == "Arabic")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        للمشاركة في الاستبيان، يرجى إدخال عنوان البريد الإلكتروني الرسمي الخاص بك لدى منظمة الصحة العالمية أو منظمة الصحة للبلدان الأمريكية
+                        ستُنشئ منصة الاستبيان تلقائيًا رمز مرور عشوائيًا وسترسله إلى حساب البريد الإلكتروني الخاص بك لدى منظمة الصحة العالمية أو منظمة الصحة للبلدان الأمريكية
+                        لا يتم تسجيل عناوين البريد الإلكتروني أو ربطها بنتائج الاستبيان
+                    </p>
+                }
+                if (ViewBag.lang == "Chinese")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        要参与调查，请输入您的官方世界卫生组织或泛美卫生组织电子邮件地址。
+                        调查平台将自动生成随机密码并将其发送至您的世界卫生组织或泛美卫生组织电子邮件帐户。
+                        不会记录电子邮件地址或将其与调查结果相关联。
+                    </p>
+                }
+                if (ViewBag.lang == "Russian")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Чтобы принять участие в опросе, введите свой официальный адрес электронной почты ВОЗ или ПАОЗ.
+                        Платформа опроса автоматически создаст случайный пароль и отправит его на ваш адрес электронной почты ВОЗ или ПАОЗ.
+                        Адреса электронной почты не регистрируются и не связываются с результатами опроса.
+                    </p>
+                }
+            }
+            else
+            {
+                if (ViewBag.lang == "" || ViewBag.lang == "English")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        If you do not receive your passcode in your WHO or PAHO email inbox, please check your email’s Spam folder
+                        for an email from <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> with the subject line “WHO Survey Passcode”.
+                        Please contact <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> if you encounter issues accessing the survey.
+                    </p>
+                }
+                if (ViewBag.lang == "Portuguese")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Se não receber um código de acesso na sua caixa de entrada do e-mail da OMS ou OPAS, verifique se a sua pasta de Spam contém um e-mail de <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> com o assunto "Código de acesso ao inquérito da OMS".
+                        Contacte <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> se tiver dificuldade em aceder ao inquérito.
+                    </p>
+                }
+                if (ViewBag.lang == "Spanish")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Si no recibe un código de acceso en su bandeja de entrada de correo electrónico de la OMS o la OPS, busque en la carpeta de correo no deseado de su correo electrónico un mensaje de <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> con el asunto «Código de acceso de la encuesta de la OMS».
+                        Póngase en contacto con <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> si tiene problemas para acceder a la encuesta.
+                    </p>
+                }
+                if (ViewBag.lang == "French")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Si vous ne recevez pas de code d’accès dans votre boîte de réception d’e-mails de l’OMS ou de l’OPS, consultez le dossier Spam de votre messagerie à la recherche d’un e-mail provenant de <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> dont l’objet est « WHO Survey Passcode » (Code d’accès à l’enquête de l’OMS).
+                        Veuillez contacter <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> si vous rencontrez des problèmes pour accéder à l’enquête.
+                    </p>
+                }
+                if (ViewBag.lang == "Arabic")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        إذا لم تتلقَ رمز مرور في صندوق الوارد لبريدك الإلكتروني لدى منظمة الصحة العالمية أو منظمة الصحة للبلدان الأمريكية، يرجى التحقق من صندوق البريد العشوائي لبريدك الإلكتروني للعثور على رسالة إلكترونية من <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> بها عبارة "WHO Survey Passcode (رمز المرور الخاص باستبيان منظمة الصحة العالمية)" في خانة الموضوع
+                        يرجى التواصل عبر <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a> إذا واجهتك مشكلات في الوصول إلى الاستبيان
+                    </p>
+                }
+                if (ViewBag.lang == "Chinese")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        如果您在世界卫生组织或泛美卫生组织的邮箱中未收到密码，请检查电子邮件的垃圾邮件文件夹，看看是否有一封来自 <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a>，主题为“世界卫生组织调查密码”的电子邮件。
+                        如果您在访问调查时遇到问题，请联系 <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a>。
+                    </p>
+                }
+                if (ViewBag.lang == "Russian")
+                {
+                    <p class="mb-5" align="center" style="font-size:18px;">
+                        Если вы не обнаружили письмо с паролем в папке входящих сообщений вашей электронной почты ВОЗ или ПАОЗ, проверьте, нет ли письма с темой «WHO Survey Passcode» («Пароль для опроса ВОЗ»), отправленного с адреса <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a>, в папке «Спам».
+                        При возникновении проблем с доступом к опросу, обратитесь по адресу: <a href="mailto:survey@deiready.com"><u class="p-font-weight">survey@deiready.com</u></a>.
+                    </p>
+                }
+            }
+            <div class="col-md-3"></div>
+
+
+            <!-- HERO FORM -->
+            <div class="col-md-6">
+
+                <div class="hero-form text-center mb-40">
+
+
+                    @if (ViewBag.Email == "")
+                    {
+                        if (ViewBag.lang == "" || ViewBag.lang == "English")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>@ViewBag.msg</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4">Enter Your Valid WHO or PAHO Email</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>Email : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="Enter email here" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    @*<input type="hidden" value="@ViewBag.SurveyId" id="SurveyId" />
+                                <input type="hidden" value="@ViewBag.RecpID" id="RecpID" />
+                                <input type="hidden" value="@ViewBag.lang" id="lang" />*@
+                                    <input type="hidden" value="English" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">NEXT</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        For more information regarding confidentiality
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Click Here
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "Portuguese")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>Senha errada, tente novamente!</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4" style="font-family:sans-serif;line-height:1.2;">INTRODUZA O SEU E-MAIL VÁLIDO DA OMS OU OPAS</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>E-mail :  </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="Introduza aqui o e-mail" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="Portuguese" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">SEGUINTE</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        Para obter mais informações sobre confidencialidade,
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            clique aqui
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "Spanish")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>Contraseña incorrecta, inténtelo de nuevo!</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4" style="font-family:sans-serif;line-height:1.2;">INTRODUZCA SU CORREO ELECTRÓNICO VÁLIDO DE LA OMS O LA OPS</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>Correo electrónico : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="Introduzca el correo electrónico aquí" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="Spanish" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">SIGUIENTE</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        Para obtener más información sobre la confidencialidad,
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            haga clic aquí
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "French")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>Mauvais mot de passe, veuillez réessayer!</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4">Saisissez votre adresse e-mail valide de l’OMS ou de l’OPS</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>E-mail :  </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="Saisissez l’adresse e-mail ici" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="French" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">SUIVANT</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        Pour plus d’informations concernant la confidentialité,
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            cliquez ici
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "Arabic")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong>!<b>رمز المرور خاطئ يرجى المحاولة مرة أخرى </b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4">أدخل بريدك الإلكتروني الصالح لدى منظمة الصحة العالمية أو منظمة الصحة للبلدان الأمريكية</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label> :البريد الإلكتروني  </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="أدخل البريد الإلكتروني هنا" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="Arabic" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">التالي</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        لمزيد من المعلومات حول السرية,
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            انقر هنا
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "Chinese")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>密码错误请重试！</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4">输入有效的世界卫生组织或泛美卫生组织电子邮件</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>电子邮件 ：   </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="在此处输入电子邮件" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="Chinese" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">下一步</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        有关保密的更多信息，
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            请单击此处
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+                        if (ViewBag.lang == "Russian")
+                        {
+                            <div class="text-left pl-5" style="color: red; font-size:16px;" id="alertMsg">
+                                @if (ViewBag.msg != null && ViewBag.msg != "")
+                                {
+                                    <strong><b>Неверный пароль, пожалуйста, попробуйте еще раз!</b></strong>
+                                }
+                            </div>
+
+                            <form class="row bg-blue quick-form" id="surveyform">
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+
+                                    <h4 class="h4-xl mb-4">Введите свой действительный адрес электронной почты ВОЗ или ПАОЗ</h4>
+
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <label>Электронная почта : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="email" class="form-control" id="email" placeholder="Введите адрес электронной почты здесь" required></span>
+                                </div>
+                                <!-- Form Submit Button -->
+
+                                <div class="col-md-12">
+                                    <input type="hidden" value="Russian" id="lang" />
+                                    <button type="button" id="btnclck" class="btn btn-md btn-theme tra-hover">Далее</button>
+                                </div>
+
+                            </form>
+
+                            <p class="mt-4 ml-4" align="center">
+                                <h4>
+                                    <span style="font-size:16px; font-weight:300;">
+                                        Для получения дополнительной информации о конфиденциальности
+                                    </span>
+                                    <span class="badge badge-secondary btn-theme tra-hover">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                            нажмите здесь
+                                        </a>
+                                    </span>
+                                </h4>
+                            </p>
+                        }
+
+
+                    }
+                    else
+                    {
+                        if (ViewBag.lang == "English" || ViewBag.lang == "")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">Enter the Valid Passcode</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>The survey platform will send a unique password to your WHO or PAHO email account. This may take up to two minutes.</p>
+                                <label>Passcode : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Enter passcode here" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    @*<input type="hidden" value="@ViewBag.SurveyId" name="SurveyId" />
+                                <input type="hidden" value="@ViewBag.RecpID" name="RecpID" />*@
+
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    @*<input type="hidden" value="@ViewBag.lang" name="Lang" />*@
+                                    <input type="hidden" value="English" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">NEXT</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "Portuguese")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">Introduza o código de acesso válido</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>A plataforma do inquérito envia um código de acesso exclusivo para a sua conta de e-mail da OMS ou OPAS.</p>
+                                <label>Código de acesso : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Introduza aqui o código de acesso" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="Portuguese" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">SEGUINTE</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "Spanish")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">Introduzca un código de acceso válido</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>La plataforma de encuestas enviará un código de acceso único a su cuenta de correo electrónico de la OMS o la OPS.</p>
+                                <label>Código de acceso : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Introduzca el código de acceso aquí" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="Spanish" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">SIGUIENTE</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "French")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">Saisissez le code d’accès valide</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>La plateforme d’enquête enverra un code d’accès unique à votre compte de messagerie OMS ou OPS.</p>
+                                <label>Code d’accès : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Saisissez le code d’accès ici" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="French" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">SUIVANT</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "Arabic")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">أدخل رمز المرور الصالح</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>سترسل منصة الاستبيان رمز مرور فريدًا إلى حساب البريد الإلكتروني الخاص بك لدى منظمة الصحة العالمية أو منظمة الصحة للبلدان الأمريكية</p>
+                                <label>:رمز المرور</label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="أدخل رمز المرور هنا" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="Arabic" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">التالي</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "Chinese")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">输入有效的密码</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>调查平台将向您的世界卫生组织或泛美卫生组织电子邮件帐户发送唯一的密码。</p>
+                                <label>密码 ： </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="在此处输入密码" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="Chinese" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">下一步</button>
+                                </div>
+
+                            </form>
+                        }
+                        if (ViewBag.lang == "Russian")
+                        {
+                            <form action="@Url.Action("DemographicData", "Home")" method="post" class="row bg-blue" style="padding: 19px 35px; margin: 0 10px 0 40px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+
+                                <!-- Form Text -->
+                                <div class="col-md-12">
+                                    <!-- Title -->
+                                    <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                    <h4 class="h4-xl mb-4">Введите действительный пароль</h4>
+                                </div>
+
+                                <!-- Language Form Input -->
+                                <p>Платформа опроса отправит уникальный пароль на ваш адрес электронной почты ВОЗ или ПАОЗ.</p>
+                                <label>Пароль : </label>
+                                <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                    <span><input type="text" class="form-control" name="Passcode" id="passcode" placeholder="Введите пароль здесь" required></span>
+                                </div>
+
+
+                                <!-- Form Submit Button -->
+                                <div class="col-md-12">
+                                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                                    <input type="hidden" value="Russian" name="Lang" />
+                                    <button type="submit" class="btn btn-md btn-theme tra-hover">Далее</button>
+                                </div>
+
+                            </form>
+                        }
+
+
+                    }
+
+                </div>
+            </div> <!-- END HERO FORM -->
+
+            <div class="col-md-3"></div>
+
+            <!--Confidential Modal Start-->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                        @if (ViewBag.lang == "English" || ViewBag.lang == "")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Confidentiality Information</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: auto;">
+                                <p align="justify" style="color:#000 !important;">
+                                    This survey is administered by DEI Ready. The survey does not record personal details. All responses to the survey
+                                    will remain strictly anonymous and confidential and will be aggregated to construct a snapshot of the organizational culture
+                                    at your organization.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Portuguese")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Informações de confidencialidade</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Perto">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    Este inquérito é administrado por um prestador de serviços externo: Center for Asia Leadership Initiatives e respetiva subcontratada, a DEI Ready.
+                                    O ficheiro de dados residirá fora da OMS, numa plataforma separada, junto do prestador de serviços externo.
+                                    Ninguém na OMS terá acesso ao ficheiro.  O inquérito não guarda quaisquer dados pessoais.
+                                    Todas as respostas ao inquérito permanecerão estritamente anónimas e confidenciais e serão agregadas para criar um instantâneo da cultura organizacional na OMS.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Spanish")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Información sobre la confidencialidad</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="cerca">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    Esta encuesta la administra un proveedor de servicios externo: Center for Asia Leadership Initiatives y su subcontratista DEI Ready.
+                                    El archivo de datos quedará alojado fuera de la OMS con el proveedor de servicios externo en una plataforma independiente.
+                                    Ningún miembro interno de la OMS tendrá acceso a él. La encuesta no registra ningún dato personal.
+                                    Todas las respuestas a la encuesta serán estrictamente anónimas y confidenciales, y se recopilarán para crear una visión de la cultura organizativa de la OMS.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "French")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Informations concernant la confidentialité</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="proche">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    Cette enquête est gérée par un prestataire de services externe : Center for Asia Leadership Initiatives et son sous-traitant DEI Ready.
+                                    Le fichier de données résidera en dehors de l’OMS auprès du fournisseur de services externe sur une plateforme distincte.
+                                    Personne au sein de l’OMS n’y aura accès. L’enquête n’enregistre aucune donnée personnelle.
+                                    Toutes les réponses à l’enquête resteront strictement anonymes et confidentielles et seront regroupées afin de créer un aperçu de la culture organisationnelle au sein de l’OMS.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">d'accord</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Arabic")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">معلومات السرية</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="أغلق">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    يُدار هذا الاستبيان بواسطة مقدم خدمات خارجي: مركز المبادرات القيادية في آسيا (Center for Asia Leadership Initiatives) وشركة DEI Ready المتعاقدة معه
+                                    سيوضع ملف البيانات خارج منظمة الصحة العالمية لدى مقدم الخدمات الخارجي على منصة منفصلة
+                                    لن يكون في إمكان أحد في منظمة الصحة العالمية الوصول إليه لا يسجل الاستبيان أي بيانات شخصية
+                                    ستظل جميع الإجابات على الاستبيان مجهولة الهوية وسرية تمامًا، وسيتم تجميعها لإنشاء لمحة عن الثقافة المؤسسية في منظمة الصحة العالمية
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">نعم</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Chinese")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">保密信息</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="关">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    本调查由外部服务提供商管理：亚洲领导行动中心及其分包商 DEI Ready。
+                                    数据文件将驻留在世界卫生组织的外部服务提供商的一个单独平台上。
+                                    世界卫生组织内部的任何人都无法访问该平台。 本调查不会记录任何个人详细信息。
+                                    对调查的所有答复将严格保持匿名和保密，并将进行汇总以构建世界卫生组织的组织文化快照。
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">好的</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Russian")
+                        {
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Информация о конфиденциальности</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="ЗАКРЫТЬ">
+                                    <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body" style="height: 36vh !important;">
+                                <p align="justify" style="color:#000 !important;">
+                                    Этот опрос проводит внешний поставщик услуг — Центр инициатив лидерства в Азии со своим субподрядчиком DEI Ready.
+                                    Файл данных будет находиться за пределами ВОЗ, у внешнего поставщика услуг на отдельной платформе.
+                                    Никто в ВОЗ не будет иметь к нему доступ. Никакие персональные данные, указанные в опросе, зарегистрированы не будут.
+                                    Все ответы, данные в рамках опроса, останутся строго анонимными и конфиденциальными и будут объединены для получения среза информации о состоянии корпоративной культуры в ВОЗ.
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">ХОРОШО</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Confidential Modal -->
+
+        </div>	   <!-- End row -->
+    </div> 	   <!-- End container -->
+</section>	<!-- END HERO-6 -->
+
+
+<script>
+
+    $('#alertMsg').fadeOut(7000);
+
+    $('#btnclck').click(function () {
+        var getvalidate = document.getElementById("surveyform").reportValidity();
+        var email = document.getElementById("email").value.toLowerCase();
+        //var pas = document.getElementById("passcode");
+        var lan = document.getElementById("lang").value;
+        //var passcode = "";
+
+
+        //if (pas != null) {
+        //    passcode = pas.value;
+        //}
+        
+        console.log(lan);
+        if (getvalidate == true) {
+            window.open('../Home/Index?Email=' + email + '&Lang=' + lan, "_parent");
+        }
+
+        //var SurveyId = document.getElementById("SurveyId").value;
+        //var RecpID = document.getElementById("RecpID").value;
+
+
+        //if (email.includes("gmail.com")) {
+        //    window.open('../Home/Index?Email=' + email + '&Passcode=' + passcode, "_parent");
+        //}
+        //else {
+        //    alert("Invalid Email. Please enter the valid WHO email and try again!");
+        //}
+    });
+
+    
+    if ($("#lang").val() == "Chinese") {
+        
+        document.body.style.fontFamily = "Microsoft YaHei";
+    }
+
+
+</script>

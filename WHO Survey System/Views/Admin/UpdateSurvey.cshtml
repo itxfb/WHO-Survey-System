@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "UpdateSurvey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row p-20" style="min-height:700px;">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <div class="text-left" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                    @ViewBag.Message
+                </div>
+                <h4 class="panel-title" align="center"><b><u>Update Survey</u></b></h4>
+            </div>
+            <div class="panel-body">
+                <form id="surveyform" action="@Url.Action("PostUpdateSurvey", "Admin")" method="post">
+                    <input type="hidden" name="Id" id="updateId" />
+                    <div class="form-group">
+                        <label for="modal-name" class="col-form-label text-bold">Title<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Your Title" id="updateTitle" name="Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-name" class="col-form-label text-bold">Description<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Description Here" id="updateDescription" name="Description" required>
+                    </div>
+                    @{
+                        for (int i = 0; i < ViewBag.Surveys; i++)
+                        {
+                            var j = i + 1;
+                            <div class="form-group">
+                                <label class="text-bold">Category @j<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control cat_@i" placeholder="Enter Your Category" required>
+                            </div>
+
+                            <div class="form-group" style="padding-left: 27px;">
+                                <label class="text-bold">Scenario<span class="text-danger">*</span></label>
+                                <input type="text" id="asc_@i" class="form-control sc_@i" placeholder="Enter Your Scenario 1" required>
+                                <input type="text" id="bsc_@i" class="form-control sc_@i" placeholder="Enter Your Scenario 2" required>
+                                <input type="text" id="csc_@i" class="form-control sc_@i" placeholder="Enter Your Scenario 3" required>
+                                <input type="text" id="dsc_@i" class="form-control sc_@i" placeholder="Enter Your Scenario 4" required>
+                            </div>
+
+                        }
+                    }
+                    <input id="ctsn" type="hidden" name="Cat_n_Scn" value="" />
+
+                    <div class=" col-lg-12">
+                        <label class="text-bold">Enter a Question<span class="text-danger">*</span></label>
+                        <textarea type="text" class="form-control openEnd_0" placeholder="Enter Name here..." required autocomplete="off"></textarea><br>
+                    </div>
+                    <div class=" col-lg-12">
+                        <label class="text-bold">Enter a Question<span class="text-danger">*</span></label>
+                        <textarea type="text" class="form-control openEnd_1" placeholder="Enter Name here..." required autocomplete="off"></textarea><br>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="sub" class="btn btn-primary">Update</button>
+                        @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+</div>
+<input type="hidden" value="@ViewBag.Surveys" id="CompanyTotalSurveys" />
+<script>
+    var CompanyTotalSurveys = $("#CompanyTotalSurveys").val();
+    var getSurveyId = "@ViewBag.getSurvey.Id";
+    UpdateUser(getSurveyId);
+    function UpdateUser(id) {
+        $.ajax({
+            type: 'POST',
+            //url: "../Admin/GetSurveyById",
+            url: "@Url.Action("GetSurveyById", "Admin")",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (response) {
+                $('#updateId').val(response.Id);
+                $('#updateTitle').val(response.Title);
+                $('#updateDescription').val(response.Description);
+                $('#getCompanyTotalSurveys').val(response.CompanyTotalSurveys);
+
+                var getCatnScn = JSON.parse(response.Category_Scenarios);
+
+                var i = 0;
+                $.each(getCatnScn, function (key, valueObj) {
+                    var getalpha = ['a', 'b', 'c', 'd'];
+                    if (i == 0) {
+                        console.log("Obj 1", valueObj);
+                    }
+                    if (!key.includes("Open")) {
+                        $(".cat_" + i).val(key);
+                        for (var j = 0; j < 4; j++) {
+                            $("#" + getalpha[j] + "sc_" + i).val(valueObj[j]);
+                        }
+                    }
+                    else {
+                        for (var j = 0; j < 2; j++) {
+                            $(".openEnd_" + j).val(valueObj[j]);
+                        }
+                    }
+                    i++;
+                });
+
+            },
+            error: function () {
+                alert("ajax Failed");
+            }
+        });
+    }
+
+    $("#sub").click(function () {
+        var Categories = [];
+        var Scenarios = [];
+
+        var getvalidate = document.getElementById("surveyform").reportValidity();
+        $("[class*='cat_']").each(function () {
+            Categories.push($(this).val());
+        });
+        Categories.push("Open Ended Questions");
+
+        //for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < CompanyTotalSurveys; i++) {
+            var arr = [];
+            $(".sc_" + i).each(function () {
+                arr.push($(this).val());
+            });
+            Scenarios.push(arr);
+        }
+
+        //for openended questions
+        var openEndarr = [];
+        $("[class*='openEnd']").each(function () {
+            openEndarr.push($(this).val());
+        });
+        Scenarios.push(openEndarr);
+
+        //console.log("Categories",Categories);
+        //console.log("Scenarios",Scenarios);
+        var x = Scenarios.associate(Categories);
+        x = JSON.stringify(x);
+        $("#ctsn").val(x);
+
+        //console.log("Dictona",x);
+        if (getvalidate == true) {
+            $("#surveyform").submit();
+        }
+    });
+</script>

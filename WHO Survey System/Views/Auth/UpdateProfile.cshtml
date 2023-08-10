@@ -1,0 +1,63 @@
+﻿@using WHO_Survey_System.BL
+@using WHO_Survey_System.HelpingClasses
+@using WHO_Survey_System.Models
+@using System.Data.SqlClient;
+@{
+    DatabaseEntities db = new DatabaseEntities();
+    SqlConnection de = new SqlConnection("Data Source=SG2NWPLS19SQL-v09.mssql.shr.prod.sin2.secureserver.net;Initial Catalog=ph17933550275_;User Id=whosurvey;Password=nodlays@123;");
+
+
+    var identity = (System.Security.Claims.ClaimsPrincipal)System.Threading.Thread.CurrentPrincipal;
+    var id = identity.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Sid).Select(c => c.Value).SingleOrDefault();
+    User loggedinUser = new UserBL().GetUserById(Convert.ToInt32(id), de);
+
+    ViewBag.Title = "Update Profile (" + loggedinUser.FirstName + ")";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main content -->
+<div style="min-height:950px;">
+    <br />
+    <!-- Simple login form -->
+    <form action="@Url.Action("PostUpdateProfile","Auth")" class="login-form" method="post">
+        <div class="col-md-2"></div>
+        <div class="panel panel-body col-lg-8">
+            <div class="notify" style="color:@ViewBag.Color; font-weight:bold;" id="alertMsg">
+                @ViewBag.Message
+            </div>
+            <div class="text-center">
+                <div class="icon-object text-blue"><i class="fa fa-user-plus text-blue"></i></div>
+                <h5 class="content-group">Update Profile <small class="display-block">Enter your credentials below</small></h5>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="hidden" required name="Id" value="@loggedinUser.Id" readonly />
+            </div>
+
+            <div class="form-group">
+                <label class="text-bold">First Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter First Name Here" required name="FirstName" value="@loggedinUser.FirstName ">
+            </div>
+
+            <div class="form-group">
+                <label class="text-bold">Last Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Last Name Here" required name="LastName" value="@loggedinUser.LastName ">
+            </div>
+
+            <div class="form-group">
+                <label class="text-bold">Email<span class="text-danger">*</span> </label>
+                <input type="email" class="form-control" placeholder="Enter Valid Email Address Here" required name="Email" value="@loggedinUser.Email">
+            </div>
+
+            <div class="form-group">
+                <label class="text-bold">Password<span class="text-danger">*</span> </label>
+                <input type="password" class="form-control" required name="Password" value="@StringCipher.Decrypt(loggedinUser.Password)">
+            </div>
+
+            <div class="form-group pull-right">
+                <button type="submit" class="btn bg-blue-800 ">Update<i class="icon-database-add position-right"></i></button>
+            </div>
+        </div>
+    </form>
+    <!-- /simple login form -->
+</div>
+<!-- /main content -->

@@ -1,0 +1,530 @@
+﻿@{
+    ViewBag.Title = "Survey Responses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="modal" id="deleteModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Do You Want to Delete?</h4>
+                <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer text-center">
+                <a class="btn btn-danger" id="deleteId">Yes</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@*Link with search datatable*@
+<div class="row m-5" style=" border:2px solid #424ef4; border-radius:10px; color:white;">
+    <div class="col-xs-12" style="background-color:#0005A7; border-radius:10px;">
+        <div class="row">
+
+            <div class="col-md-12 col-lg-12" style="padding: 20px;padding-top:20px;">
+                <div class="form-group">
+                    <label><strong>Survey Title:</strong></label>
+                    <input type="text" placeholder="  Search Title Here" class="form-control" id="searchTitle" style="background-color:white">
+                </div>
+            </div>
+
+            @*<div class="col-md-6 col-lg-6" style="padding: 20px;padding-top:20px;">
+                <div class="form-group">
+                    <label><strong>Description:</strong></label>
+                    <input type="text" placeholder="  Search Description Here" class="form-control" id="searchDescription" style="background-color:white">
+                </div>
+            </div>*@
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-12" style="padding-left: 20px; padding-right: 20px;">
+                <div class="form-group">
+                    <a onclick="exportData()" role="button" class="btn btn-primary" style="width:100%;">
+                        Export Survey Responses
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-12" style="padding-left: 20px; padding-right:20px;">
+                <div class="form-group pull-right" style="width:100%;">
+                    <button onclick="SearchUser()" class="btn btn-primary d-flex justify-content-end button-margin" style="width:100%;">Search</button><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="text-center text-bold">To Export Data</h5>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("ExportToExcel","Admin")" method="post" id="formid">
+                    <div style="font-weight:bold; font-size:15px; color:@ViewBag.Color ; margin-left:10px;" id="alertMsg">
+                        @ViewBag.Message
+                    </div>
+                    <div class="col-md-12 col-lg-12" style="padding: 20px;padding-top:20px;">
+                        <div class="form-group">
+                            <label for="modal-Type" class="col-form-label text-bold">Survey<span class="text-danger">*</span></label>
+                            <select class="form-control selectpicker" tabindex="-1" aria-hidden="true" name="sId" id="searchSurvey" data-live-search="true" required style="background-color:white">
+                                <option value="">Select Survey</option>
+                                @foreach (var item in ViewBag.surveylist)
+                                {
+                                    foreach (var comp in ViewBag.companyList)
+                                    {
+                                        if (item.CompanyId == comp.Id)
+                                        {
+
+                                            <option value="@item.Id">@(item.Title +" ("+  comp.CompanyName +")")</option>
+
+
+                                        }
+
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                    <div class="text-right">
+                        <button type="button" onclick="sub()" class="btn btn-primary">Export</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<br />
+<div class="clearfix">
+    <h3 class="text-center">
+        <u>Survey Response List</u>
+    </h3>
+</div>
+<br />
+
+<div style="min-height:700px">
+    <div style="font-weight:bold; font-size:15px; color:@ViewBag.Color ; margin-left:10px;" id="alertMsg">
+        @ViewBag.Message
+    </div>
+    <div class="datatable-scroll table-bordered p-10 table-responsive">
+        <table class="table no-footer table-responsive table-striped" id="userTable">
+            <thead class="bg-blue-400">
+                <tr>
+                    <th class="text-bold text-center" hidden>...
+                    </th>
+                    <th class="text-bold text-center" style="min-width:130px">
+                        Actions
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        Survey Title
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown1
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown2
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown3
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown4
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown5
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown6
+                    </th>
+                    <th class="text-bold" style="min-width:130px">
+                        DemoGraphic DropDown7
+                    </th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script>
+    $('select').selectpicker();
+
+    function exportData() {
+        $('#updateModal').modal('show');
+    }
+    function sub() {
+       
+        if ($("#searchSurvey").val() != "") {
+            $("#updateModal").modal('hide');
+            $("#formid").submit();
+        }
+
+        
+        
+        @*//var url = '@Url.Action("ViewSurveyResponsePage", "Admin", new { msg = "File Exported Successfully" })'+"&color=green";
+        //window.open(url, "_parent");*@
+       
+
+
+    }
+
+    $("#alertMsg").fadeOut(4000);
+
+</script>
+
+<script>
+
+    loadTable();
+    function loadTable(title) {
+        $('#userTable').DataTable(
+            {
+                "ajax":
+                {
+                    "url": '@Url.Action("GetSurveyResponseList", "Admin")',
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": { Title: title}
+                },
+                'columns':
+                    [
+                        { "data": "hidden", "name": "0" },
+                        { "data": "SurveyTitle", "name": "SurveyTitle" },
+                        { "data": "Age", "name": "Age" },
+                        { "data": "Gender", "name": "Gender" },
+                        { "data": "Experience", "name": "Experience" },
+                        { "data": "WorkPlace", "name": "WorkPlace" },
+                        { "data": "Contract_Category", "name": "Contract_Category" },
+                        { "data": "DemoGraphicDropDown6", "name": "DemoGraphicDropDown6" },
+                        { "data": "DemoGraphicDropDown7", "name": "DemoGraphicDropDown7" }
+                        //{ "data": "ContractualStatus", "name": "ContractualStatus" }
+                    ],
+                'columnDefs':
+                    [
+                        {
+                            "targets": 0,
+                            "visible": false,
+                            "searchable": false,
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                console.log(full);
+                                return null;
+                            }
+                        },
+                        {
+                            "targets": 1,
+                            'className': '',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+
+                                return '<ul class="icons-list text-center"> <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a> <ul class="dropdown-menu dropdown-menu-right" style="left:0 !important;right:0 !important"> ' +
+                                    '<li><a class="text-onfo" href="/Admin/ViewSurveyResponse?surveyId=' + full.SurveyId + '&surveyResId=' + full.Id + '"><i class="icon-pencil"></i>Survey Response</a></li>' +
+                                    '<li><a class="text-danger" onclick="deleteFunction(' + full.Id + ')" data-toggle="modal" data-target="#deleteModal"><i class="glyphicon glyphicon-floppy-remove"></i> Delete</a></li>' +
+                                    '</ul></li></ul>';
+                            }
+                        },
+                        {
+                            "targets": 2,
+                            'className': '',
+                            "orderable": true,
+                            "render": function (data, type, full, meta) {
+                                // return '<div class="text-center">' + full.Name + '</div>';
+                                return full.SurveyTitle;
+                            }
+                        },
+                        {
+                            "targets": 3,
+                            'className': '',
+                            "orderable": true,
+                            "render": function (data, type, full, meta) {
+
+                                //return full.Gender;
+                                var QAndAns = full.Gender.split(',');
+                                var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                var QAns = Q + Ans;
+                                return QAns;
+
+                            }
+                        },
+                        {
+                            "targets": 4,
+                            'className': '',
+                            "orderable": true,
+                            "render": function (data, type, full, meta) {
+                                // return '<div class="text-center">' + full.Name + '</div>';
+                                //return full.Age;
+                                var QAndAns = full.Age.split(',');
+                                var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                var QAns = Q + Ans;
+                                return QAns;
+                            }
+                        },
+                        {
+                            "targets": 5,
+                            'className': '',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                //return full.Experience;
+
+                                var QAndAns = full.Experience.split(',');
+                                var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                var QAns = Q + Ans;
+                                //console.log("Q5="+Q);
+
+                                return QAns;
+                            }
+                        },
+                        {
+                            "targets": 6,
+                            'className': '',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                if (full.Work_Place == null || full.Work_Place == "")
+                                {
+                                   
+                                    
+                                    return full.Work_Place;
+
+
+                                }
+                                else
+                                {
+
+                                     var QAndAns = full.Work_Place.split(',');
+                                    var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                    var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                    var QAns = Q + Ans;
+                                    return QAns;
+                                }
+                            }
+                        },
+                        {
+                            "targets": 7,
+                            'className': '',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                //return full.Contract_Category;
+                                if (full.Contract_Category == null || full.Contract_Category == "") {
+
+                                    return full.Contract_Category;
+
+
+                                }
+                                else {
+
+                                    var QAndAns = full.Contract_Category.split(',');
+                                    var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                    var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                    var QAns = Q + Ans;
+                                    return QAns;
+                                }
+                            }
+                        },
+
+                        {
+                            "targets": 8,
+                            'className': '',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                //return full.Contract_Category;
+                                if (full.DemoGraphicDropDown6 == null || full.DemoGraphicDropDown6 == "") {
+
+                                    return full.DemoGraphicDropDown6;
+
+
+
+                                }
+                                else {
+
+                                    var QAndAns = full.DemoGraphicDropDown6.split(',');
+                                    var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                    var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                    var QAns = Q + Ans;
+                                    return QAns;
+                                }
+                            }
+                        },
+
+                        {
+                            "targets": 9,
+                            'className': 'col-lg-4',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                //return full.Contract_Category;
+                                if (full.DemoGraphicDropDown7 == null || full.DemoGraphicDropDown7 == "") {
+
+                                    return full.DemoGraphicDropDown7;
+
+
+                                }
+                                else {
+
+                                    var QAndAns = full.DemoGraphicDropDown7.split(',');
+                                    var Q = `<strong>Question</strong>:${QAndAns[0]}`;
+                                    var Ans = `</br><b>Value</b>:${QAndAns[1]}`;
+                                    var QAns = Q + Ans;
+                                    return QAns;
+                                }
+                            }
+                        }
+                        
+                    ],
+                "serverSide": "true",
+                "processing": "true",
+                "language":
+                {
+                    "processing": "<img src='../Content/assets/images/loading.gif' width='100'/>",
+                    "search": "<span>Search :</span> _INPUT_",
+                    //"searchPlaceholder": "Filter Value By Title/Description...",
+                    "lengthMenu": "<span>Show :</span> _MENU_",
+                    "paginate": { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+                },
+            }
+        );
+    }
+
+    function SearchUser()
+    {
+
+        $('#userTable').DataTable().clear();
+        $('#userTable').DataTable().destroy();
+
+        var title = document.getElementById("searchTitle").value;
+        //var description = document.getElementById("searchDescription").value;
+
+        loadTable(title);
+    }
+
+    //View Categories and Scenarios
+    function UpdateUser(id)
+    {
+        $('#loadImg').show();
+
+        $.ajax({
+            type: 'POST',
+            url: "../Admin/GetSurveyById",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (response)
+            {
+                //console.log(response);
+                $('#updateId').val(response.Id);
+                $('#updateTitle').val(response.Title);
+                $('#updateDescription').val(response.Description);
+
+                $('#updateModal').modal('show');
+                $('#loadImg').hide();
+
+                var getCatnScn = JSON.parse(response.Category_Scenarios);
+
+                console.log("catnSN", getCatnScn);
+
+               var i = 0;
+
+               $.each(getCatnScn, function (key, valueObj) {
+
+                   //console.log("key " + i, key);
+                   //console.log("valueObj " + i, valueObj);
+                   var getalpha = ['a', 'b', 'c', 'd'];
+
+                   if (i == 0) {
+                       console.log("Obj 1",valueObj);
+                   }
+                    if (!key.includes("Open")) {
+                        $(".cat_" + i).val(key);
+
+
+                        for (var j = 0; j < 4; j++) {
+                            $("#"+getalpha[j]+"sc_" + i).val(valueObj[j]);
+                        }
+
+
+                    }
+                    else {
+
+                        for (var j = 0; j < 2; j++) {
+                            $(".openEnd_"+j).val(valueObj[j]);
+                        }
+                    }
+                   i++;
+
+                });
+
+            },
+            error: function () {
+                alert("ajax Failed");
+            }
+        });
+    }
+
+    function deleteFunction(id)
+    {
+        var a = document.getElementById('deleteId');
+        a.href = "../Admin/DeleteSurveyResponse?id=" + id + "";
+    }
+
+
+    $("#sub").click(function () {
+        var Categories = [];
+        var Scenarios = [];
+
+        var getvalidate = document.getElementById("surveyform").reportValidity();
+        $("[class*='cat_']").each(function () {
+            Categories.push($(this).val());
+        });
+        Categories.push("Open Ended Questions");
+
+        for (let i = 0; i < 9; i++) {
+            var arr = [];
+            $(".sc_" + i).each(function () {
+                arr.push($(this).val());
+            });
+            Scenarios.push(arr);
+        }
+
+        //for openended questions
+        var openEndarr = [];
+        $("[class*='openEnd']").each(function () {
+            openEndarr.push($(this).val());
+        });
+        Scenarios.push(openEndarr);
+
+        //console.log("Categories",Categories);
+        //console.log("Scenarios",Scenarios);
+        var x = Scenarios.associate(Categories);
+        x = JSON.stringify(x);
+        $("#ctsn").val(x);
+
+        //console.log("Dictona",x);
+        if (getvalidate == true) {
+            $("#surveyform").submit();
+        }
+    });
+</script>

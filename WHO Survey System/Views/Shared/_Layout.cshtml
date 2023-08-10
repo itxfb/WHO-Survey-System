@@ -1,0 +1,256 @@
+﻿@using WHO_Survey_System.HelpingClasses
+@using WHO_Survey_System.BL
+@using WHO_Survey_System.Models
+@using System.Threading;
+@using System.Security.Claims;
+@using System.Data.SqlClient;
+@{
+    DatabaseEntities db = new DatabaseEntities();
+    SqlConnection de = new SqlConnection("Data Source=SG2NWPLS19SQL-v09.mssql.shr.prod.sin2.secureserver.net;Initial Catalog=ph17933550275_;User Id=whosurvey;Password=nodlays@123;");
+
+    var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+    var id = identity.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Sid).Select(c => c.Value).SingleOrDefault();
+
+    //User loggedinUser = new UserBL().GetUserById(Convert.ToInt32(id), de);
+    var idd = Convert.ToInt32(id);
+    User loggedinUser = db.Users.Where(x => x.Id == idd && x.IsActive == 1).FirstOrDefault();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    @RenderSection("head", required: false)
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/images/Favicons/D-Fav.jpg">
+
+    <!-- Global stylesheets -->
+    <link href="~/Content/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="~/Content/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Core JS files  add for mulitiselect dropdown-->
+    <script type="text/javascript" src="~/Content/assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/ui/drilldown.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/ui/fab.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/Content/assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/pages/dashboard.js"></script>
+    <!-- /theme JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/Content/assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/notifications/pnotify.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+
+    <script type="text/javascript" src="~/Content/assets/js/core/app.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/pages/form_multiselect.js"></script>
+    <!-- /theme JS files -->
+    <!-- /Custom add libraries -->
+    <script type="text/javascript" src="~/Content/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <link href="~/Content/assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/assets/css/icons/fontawesome/fonts/fontawesome-webfont.svg" rel="stylesheet" type="text/css">
+
+    <!-- /CkEditor -->
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+
+</head>
+<body>
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse" style="background-color: #008DC9 !important;">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav">
+                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+            <div class="navbar-right">
+                @*@if (loggedinUser != null)
+                {*@
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--This is Manage profile Segment-->
+                        <li class="dropdown dropdown-user">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <span>@loggedinUser.FirstName @loggedinUser.LastName</span>
+                                <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="@Url.Action("UpdateProfile","Auth")"><i class="icon-cog5"></i> Update Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Logout","Auth")"><i class="icon-switch2"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                        <!--This is Manage profile Segment-->
+                    </ul>
+
+
+                @*}*@
+            </div>
+        </div>
+    </div>
+    <!-- /main navbar -->
+    <div class="page-container">
+        <!-- Main sidebar bbr chng -->
+
+        @*@if (loggedinUser!=null)
+        {*@
+
+            <div class="sidebar sidebar-main sidebar-default">
+                <div class="sidebar-content">
+                    <!-- User menu -->
+                    <div class="sidebar-user-material">
+                        <div class="category-content">
+                            <div class="sidebar-user-material-content">
+                                <h6>@loggedinUser.FirstName @loggedinUser.LastName</h6>
+                                <br />
+                                <span class="text-size-small">@loggedinUser.Email</span>
+                            </div>
+                            <div class="sidebar-user-material-menu">
+                                <a href="#user-nav" data-toggle="collapse"><span>My Account</span> <i class="caret"></i></a>
+                            </div>
+                        </div>
+                        <div class="navigation-wrapper collapse" id="user-nav">
+                            <ul class="navigation">
+                                <li><a href="@Url.Action("UpdateProfile","Auth")"><i class="icon-cog5"></i> <span>Update Profile</span></a></li>
+                                <li><a href="@Url.Action("Logout","Auth")"><i class="icon-switch2"></i> <span>Logout</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /user menu -->
+                    <div class="sidebar-category sidebar-category-visible">
+                        <div class="category-content no-padding">
+                            <ul class="navigation navigation-main navigation-accordion">
+                                @if (loggedinUser.Role == 1)
+                                {
+                                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    <li><a href="@Url.Action("Index", "Admin")"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-user-tie"></i> <span>Manage Users</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("AddUser", "Admin")">Add New User</a></li>
+                                            <li><a href="@Url.Action("ViewUser", "Admin")">View User Record</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-compass"></i> <span>Manage Company</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("CreateCompany", "Home")">Add New Company</a></li>
+                                            <li><a href="@Url.Action("ViewCompanies", "Company")">View Companies</a></li>
+                                        </ul>
+                                    </li>
+                                    @*<li>
+                                        <a href="#"><i class="icon-user-tie"></i> <span>Manage Recipients</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("AddRecipient", "Admin")">Add New Recipient</a></li>
+                                            <li><a href="@Url.Action("ViewRecipient", "Admin")">View Recipient Record</a></li>
+                                        </ul>
+                                    </li>*@
+                                    <li>
+                                        <a href="#"><i class="@*icon-paperplane*@ fa fa-sticky-note-o"></i> <span>Manage Survey</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("AddSurvey", "Admin")">Add New Survey</a></li>
+                                            <li><a href="@Url.Action("ViewSurvey", "Admin")">View Survey</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="@*icon-star-full2*@ icon-paperplane"></i> <span>Manage Survey @*Link and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@ Response</span></a>
+                                        <ul>
+                                            @*<li><a href="@Url.Action("AddShareLink", "Admin")">Share Survey Link</a></li>*@
+                                            <li><a href="@Url.Action("ViewSurveyResponsePage", "Admin")">View Survey Response</a></li>
+                                        </ul>
+                                    </li>
+                                    @*<li>
+                                        <a href="#"><i class="icon-screen3"></i> <span>Manage Survey Record</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("SurveyReportDownload", "Admin")">Survey Report</a></li>
+                                            <li><a href="@Url.Action("ViewSurveyResponse", "Admin")">View Survey Record</a></li>
+                                            <li><a href="@Url.Action("SurveyResponse", "Admin")">View Survey Response</a></li>
+                                            <li><a href="@Url.Action("ViewElectronicSurveyResponse", "Admin")">View Electronic Survey Response</a></li>
+                                        </ul>
+                                    </li>*@
+
+                                }
+                                @*else if (loggedinUser.Role == 2)
+                                {
+                                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    <li><a href="@Url.Action("Index", "Admin")"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-menu2"></i> <span>Manage Projects</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("ViewProductType", "Admin")"> Project Types</a></li>
+                                            <li><a href="@Url.Action("ViewProduct", "Admin")"> Projects</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="@Url.Action("ViewTask", "Admin")"><i class="icon-list"></i> <span>Project Tasks</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                    <li><a href="@Url.Action("Index", "Home")"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+
+                                    <li>
+                                        <a href="#"><i class="icon-menu2"></i> <span>My Projects</span></a>
+                                        <ul>
+                                            <li><a href="@Url.Action("ViewProject", "Home", new { Role = 1})"> As Manager</a></li>
+                                            <li><a href="@Url.Action("ViewProject", "Home", new { Role = 2})"> As Member</a></li>
+                                            <li><a href="@Url.Action("ViewProject", "Home", new { Role = 3})"> As Viewer</a></li>
+                                        </ul>
+                                    </li>
+                                }*@
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/main navigation-->
+                </div>
+            </div>
+
+
+        @*}*@
+
+        <!-- /main sidebar -->
+        <div class="bg-white">
+            @RenderBody()
+        </div>
+    </div>
+    <script>
+        //function Used to hide automatically alert message after 4 seconds
+        $("#alertMsg").fadeTo(4000, 500).slideUp(500, function () {
+            $("#alertMsg").slideUp(600);
+        });
+        Array.prototype.associate = function (arr) {
+            var index,
+                output = Object.create(null);
+            for (index = 0; index < this.length; index++) {
+                output[arr[index]] = this[index];
+            }
+            return output;
+        };
+    </script>
+
+</body>
+</html>

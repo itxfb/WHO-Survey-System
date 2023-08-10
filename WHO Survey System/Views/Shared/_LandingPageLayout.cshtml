@@ -1,0 +1,217 @@
+﻿
+@{
+    //ViewBag.lang = ProjectVariables.lang;
+
+
+    //Get Cookies And Its Value
+    HttpCookie myCookie = Request.Cookies["LanguageCookie"];
+    if (myCookie != null)
+    {
+        ViewBag.lang = myCookie["lang"];
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Nodlays" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SITE TITLE -->
+    <title>@ViewBag.Title</title>
+
+    <script src="~/Content/landingPage_Files/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/bootstrap.min.js"></script>
+
+    <!-- LottieFiles Script -->
+    <script src="https://unpkg.com/&#64;lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.1/lottie.min.js"></script>
+
+    <!-- FAVICON AND TOUCH ICONS  -->
+    <link rel="shortcut icon" href="~/Content/landingPage_Files/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Content/landingPage_Files/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/landingPage_Files/images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/landingPage_Files/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/landingPage_Files/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" href="~/Content/landingPage_Files/images/apple-touch-icon.png">
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:300,400,500,700,900" rel="stylesheet">
+
+    <!-- BOOTSTRAP CSS -->
+    <link href="~/Content/landingPage_Files/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- TEMPLATE CSS -->
+    <link href="~/Content/landingPage_Files/css/greenery.css" rel="stylesheet">
+
+    <!-- RESPONSIVE CSS -->
+    <link href="~/Content/landingPage_Files/css/responsive.css" rel="stylesheet">
+
+</head>
+
+
+
+<body>
+
+    <!-- PRELOADER SPINNER
+        ============================================= -->
+    <div id="loader-wrapper">
+        <div id="loader">
+            <div class="cssload-piano">
+                <div class="cssload-rect1"></div>
+                <div class="cssload-rect2"></div>
+                <div class="cssload-rect3"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- PAGE CONTENT
+    ============================================= -->
+    <div id="page" class="page">
+
+
+
+
+        <!-- HEADER
+        ============================================= -->
+        <header id="header" @*class="header top-line"*@>
+
+
+            <!-- HEADER STRIP -->
+            <!--<div class="headerstrip bg-white">
+            <div class="container">
+                <div class="row">-->
+            <!-- Address -->
+            <!--<div class="col-sm-6 col-md-5">
+                <span class="header-address"><i class="fas fa-map-marker-alt"></i> 8362 Pines Boulevard, Ste. 352</span>
+            </div>-->
+            <!-- Email & Phone -->
+            <!--<div class="col-sm-6 col-md-7 text-right">-->
+            <!-- <span class="header-email"><i class="far fa-envelope"></i> <a href="mailto:youremail@mail.com" class="top-line-link">info@example.com</a></span> -->
+            <!--<span class="header-hours"><i class="fas fa-envelope"></i><a href="mailto:khaleel@deiready.com"> khaleel@deiready.com</a></span>
+                            <span class="header-phone"><i class="fas fa-phone-square"></i><a href="tel:(305)-877-8176"> (305)-877-8176</a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>-->
+            <!-- END HEADER STRIP -->
+            <!-- NAVIGATION BAR -->
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark deepblue-header hover-menu" style="padding:26px!important">
+                <div class="container" style="display: block !important;" >
+                    <div class="row" hidden>
+                        <div class="col-6 col-md-6">
+                            <a href="https://www.deiready.com" target="_blank" class="navbar-brand logo-white"><img src="~/Content/landingPage_Files/images/logo-who.png" width="145" height="44" alt="header-logo"></a>
+                        </div>
+                        @*<div class="col-6 col-md-6 d-flex justify-content-end" hidden>
+                            <a href="https://www.asialeadership.org" target="_blank" class="navbar-brand logo-white"><img src="~/Content/landingPage_Files/images/second-logo.png" class="logo-img" style="width: 186px;" alt="header-logo"></a>
+                        </div>*@
+                    </div>
+                </div>	  <!-- End container -->
+            </nav>	   <!-- END NAVIGATION BAR -->
+
+
+        </header>
+        <!-- END HEADER -->
+        <!-- /main sidebar -->
+        <div class="bg-white">
+            @RenderBody()
+        </div>
+
+
+        <!-- FOOTER-2
+        ============================================= -->
+        <footer id="footer-2" style="background-color: #E9ECEF">
+            <div class="container">
+
+                <!-- FOOTER COPYRIGHT -->
+                <div class="bottom-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                           @*for english if*@
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2023 <span>DEI Ready</span>. All Rights Reserved</p>
+                           
+                            @*@if (ViewBag.lang == "Portuguese")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>DEI Ready</span>. Todos os direitos reservados</p>
+                            }
+                            @if (ViewBag.lang == "Spanish")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>DEI Ready</span>. Todos los derechos reservados</p>
+                            }
+                            @if (ViewBag.lang == "French")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>DEI Ready</span>. Tous droits réservés</p>
+                            }
+                            @if (ViewBag.lang == "Arabic")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>DEI Ready</span>. جميع الحقوق محفوظة</p>
+                            }
+                            @if (ViewBag.lang == "Chinese")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>DEI Ready</span>. 保留所有权利</p>
+                            }
+                            @if (ViewBag.lang == "Russian")
+                            {
+                                <p class="footer-copyright" style="text-align: center;">&copy; 2022 <span>ДЭИ Готов</span>. Все права защищены</p>
+                            }*@
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>	    <!-- End container -->
+        </footer>	<!-- END FOOTER-2 -->
+
+
+
+
+    </div>	<!-- END PAGE CONTENT -->
+    <!-- EXTERNAL SCRIPTS
+    ============================================= -->
+
+
+    <script src="~/Content/landingPage_Files/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/bootstrap.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/fontawesome.js"></script>
+    <script src="~/Content/landingPage_Files/js/modernizr.custom.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.easing.js"></script>
+    <script src="~/Content/landingPage_Files/js/retina.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.appear.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.stellar.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.scrollto.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.vide.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/wow.js"></script>
+    <script src="~/Content/landingPage_Files/js/owl.carousel.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.flexslider.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/contact-form.js"></script>
+    @*<script src="~/Content/landingPage_Files/js/quick-form.js"></script>*@
+    <script src="~/Content/landingPage_Files/js/comment-form.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.validate.min.js"></script>
+    <script src="~/Content/landingPage_Files/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="~/Content/landingPage_Files/js/custom.js"></script>
+    <script>
+        Array.prototype.associate = function (arr) {
+            var index,
+                output = Object.create(null);
+            for (index = 0; index < this.length; index++) {
+                output[arr[index]] = this[index];
+            }
+            return output;
+        };
+    </script>
+</body>
+
+</html>

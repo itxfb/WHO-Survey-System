@@ -1,0 +1,293 @@
+﻿@using WHO_Survey_System.HelpingClasses
+@using WHO_Survey_System.Models
+
+@{
+    ViewBag.Title = "Users Record";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img id="loadImg" src='../Content/assets/images/loading.gif' width='100' style="position:fixed; margin-top:20%; margin-left:35%; z-index:111; display:none" />
+
+<div class="modal" id="deleteModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Do You Want to Delete?</h4>
+                <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer text-center">
+                <a class="btn btn-danger" id="deleteId">Yes</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="text-center text-bold">Update User</h5>
+                <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("PostUpdateUser","Admin")" method="post">
+                    <input type="hidden" name="Id" id="updateId" />
+
+                    <div class="form-group">
+                        <label for="modal-name" class="col-form-label text-bold">First Name<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Your First Name" id="updateFName" name="FirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-name" class="col-form-label text-bold">Last Name<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Your Last Name" id="updateLName" name="LastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-name" class="col-form-label text-bold">Email<span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" placeholder="Email Here" id="updateEmail" name="Email" required>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="modal-name" class="col-form-label text-bold">Institute<span class="text-danger">*</span></label>
+                            <select class="form-control selectpicker" tabindex="-1" aria-hidden="true" name="InstituteId" id="modal-Type" data-live-search="true" onchange="surveyId(this)">
+                                <option value="">Select Institute Title</option>
+                                @foreach (var item in ViewBag.institutelist)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+                            </select>
+                        </div>*@
+
+                    <div class="modal-footer">
+                        <button type="submit" value="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Link with search datatable*@
+<div class="row m-5" style=" border:2px solid #424ef4; border-radius:10px; color:white;">
+    <div class="col-xs-12" style="background-color:#0005A7; border-radius:10px;">
+        <div class="row">
+
+            <div class="col-md-2 col-lg-6" style="padding: 20px;padding-top:20px;">
+                <div class="form-group">
+                    <label><strong>Name:</strong></label>
+                    <input type="text" placeholder="  Search Name" class="form-control" id="searchName" style="background-color:white">
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-6" style="padding: 20px;padding-top:20px;">
+                <div class="form-group">
+                    <label><strong>Email:</strong></label>
+                    <input type="text" placeholder="  Search User Email Here" class="form-control" id="searchEmail" style="background-color:white">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="padding: 20px;">
+                <div class="form-group">
+                    <button onclick="SearchUser()" class="btn btn-primary pull-right">Search</button><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="clearfix">
+    <h3 class="text-center">
+        <u>Users List</u>
+    </h3>
+</div>
+<br />
+
+<div style="min-height:700px">
+    <div style="font-weight:bold; font-size:15px; color:@ViewBag.Color ; margin-left:10px;" id="alertMsg">
+        @ViewBag.Message
+    </div>
+    <div class="datatable-scroll table-bordered p-10">
+        <table class="table no-footer table-responsive table-striped" id="userTable">
+            <thead class="bg-blue-400">
+                <tr>
+                    <th></th>
+                    <th class="text-bold">
+                        First Name
+                    </th>
+                    <th class="text-bold">
+                        Last Name
+                    </th>
+                    <th class="text-bold">
+                        Email
+                    </th>
+                    @*<th class="text-bold">
+                            Institute
+                        </th>*@
+                    <th class="text-bold text-center">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script>
+    $('select').selectpicker();
+
+    loadTable();
+
+    function loadTable(name, email)
+    {
+        $('#userTable').DataTable(
+            {
+                "ajax":
+                {
+                    "url": '@Url.Action("GetUserList", "Admin")',
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": { Name: name, Email: email }
+                },
+                'columns':
+                    [
+                        { "data": "hidden", "name": "0" },
+                        { "data": "FirstName", "name": "FirstName" },
+                        { "data": "LastName", "name": "LastName" },
+                        { "data": "Email", "name": "Email" }
+                        //{ "data": "InstituteName", "name": "InstituteName" }
+                    ],
+                'columnDefs':
+                    [
+                        {
+                            "targets": 0,
+                            "visible": false,
+                            "searchable": false,
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                return null;
+                            }
+                        },
+                        {
+                            "targets": 1,
+                            'className': 'col-lg-3',
+                            "orderable": true,
+                            "render": function (data, type, full, meta) {
+                                // return '<div class="text-center">' + full.Name + '</div>';
+                                return full.FirstName;
+                            }
+                        },
+                        {
+                            "targets": 2,
+                            'className': 'col-lg-3',
+                            "orderable": true,
+                            "render": function (data, type, full, meta) {
+                                // return '<div class="text-center">' + full.Name + '</div>';
+                                return full.LastName;
+                            }
+                        },
+                        {
+                            "targets": 3,
+                            'className': 'col-lg-3',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                return full.Email;
+                            }
+                        },
+                        //{
+                        //    "targets": 4,
+                        //    'className': 'col-lg-3',
+                        //    "orderable": false,
+                        //    "render": function (data, type, full, meta) {
+                        //        return full.InstituteName;
+                        //    }
+                        //},
+                        {
+                            "targets": 4,
+                            'className': 'col-lg-3',
+                            "orderable": false,
+                            "render": function (data, type, full, meta) {
+                                return '<ul class="icons-list text-center"> <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-menu9"></i> </a> <ul class="dropdown-menu dropdown-menu-right"> ' +
+                                    '<li><a class="text-onfo" onclick="UpdateUser(' + full.Id + ', 1)"><i class="icon-pencil"></i> Update User</a></li>' +
+                                    '<li><a class="text-danger"onclick="deleteFunction(' + full.Id + ')" data-toggle="modal" data-target="#deleteModal"><i class="glyphicon glyphicon-floppy-remove"></i> Delete</a></li>' +
+                                    '</ul></li></ul>';
+                            }
+                        }
+
+                    ],
+                "serverSide": "true",
+                "processing": "true",
+                "language":
+                {
+                    "processing": "<img src='../Content/assets/images/loading.gif' width='100'/>",
+                    "search": "<span>Search :</span> _INPUT_",
+                    //"searchPlaceholder": "Filter Name/Email",
+                    "lengthMenu": "<span>Show :</span> _MENU_",
+                    "paginate": { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+                },
+            }
+        );
+    }
+
+    function SearchUser()
+    {
+
+        $('#userTable').DataTable().clear();
+        $('#userTable').DataTable().destroy();
+
+        var name = document.getElementById("searchName").value;
+        var email = document.getElementById("searchEmail").value;
+
+        loadTable(name, email);
+    }
+
+    function UpdateUser(id)
+    {
+        $('#loadImg').show();
+
+        $.ajax({
+            type: 'POST',
+            url: "../Admin/GetUserById",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (response)
+            {
+                console.log(response);
+                $('#updateId').val(response.Id);
+                $('#updateFName').val(response.FirstName);
+                $('#updateLName').val(response.LastName);
+                $('#updateEmail').val(response.Email);
+                //$('#modal-Type').find("[value=" + response.InstituteId + "]").attr("selected",true).change();
+
+
+
+
+                $('#updateModal').modal('show');
+                $('#loadImg').hide();
+            },
+            error: function () {
+                alert("ajax Failed");
+            }
+        });
+    }
+
+    function deleteFunction(id)
+    {
+        var a = document.getElementById('deleteId');
+        a.href = "../Admin/DeleteUser?id=" + id + "";
+    }
+
+</script>
+
+

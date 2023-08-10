@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "Add Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="row" style="min-height:700px;">
+    <br />
+    <br />
+    @if (ViewBag.companyId == "" || ViewBag.companyId == null)
+    {
+    <div class="col-md-12">
+        <form id="surveyform" action="@Url.Action("AddSurvey", "Admin")" method="post">
+            <div class="row m-10">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <div class="text-left" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                                @ViewBag.Message
+                            </div>
+                            <h4 class="panel-title" align="center"><b><u>Add New Survey</u></b></h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="CompanyId" class="col-form-label text-bold">Select Company Survey<span class="text-danger">*</span></label>
+                                <i id="companiesLoader" class="fa fa-circle-notch fa-spin" style="display:none"></i>
+                                <select class="form-control" tabindex="-1" aria-hidden="true" name="companyId" id="CompanyId" required>
+                                    <option value="">Select Company</option>
+                                </select>
+                            </div>
+
+                            <div class="text-right">
+                                <button type="button" class="btn btn-primary" id="sub"><i class="fa fa-plus fa-solid"></i>&nbsp;&nbsp;&nbsp;Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    }
+    else
+    {
+<div class="col-md-12">
+    <form id="surveyform" action="@Url.Action("PostAddSurvey", "Admin")" method="post">
+        <div class="row m-10">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <div class="text-left" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                            @ViewBag.Message
+                        </div>
+                        <h4 class="panel-title" align="center"><b><u>Add New Survey</u></b></h4>
+                    </div>
+                    <div class="panel-body">
+                        <input type="hidden" name="companyId" value="@ViewBag.companyId" />
+                        <div class="form-group">
+                            <label class="text-bold">Title<span class="text-danger">*</span></label>
+                            <input type="text" id="survey_title" onkeyup="removeSpecialCharacters(this)" class="form-control" placeholder="Enter Your Survey Title" required name="Title">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-bold">Description<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" onkeyup="removeSpecialCharacters(this)" placeholder="Enter Your Description" required name="Description">
+                        </div>
+
+                        @for (int i = 1; i <= ViewBag.companyIdSurvey; i++)
+                        {
+
+                            <div class="form-group">
+                                <label class="text-bold">Category @i <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control cat" onkeyup="removeSpecialCharacters(this)" placeholder="Enter Your Category" required>
+                            </div>
+
+                            <div class="form-group" style="padding-left: 27px;">
+                                <label class="text-bold">Scenario<span class="text-danger">*</span></label>
+                                <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control sc_@i" placeholder="Enter Your Scenario 1" required>
+                                <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control sc_@i" placeholder="Enter Your Scenario 2" required>
+                                <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control sc_@i" placeholder="Enter Your Scenario 3" required>
+                                <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control sc_@i" placeholder="Enter Your Scenario 4" required>
+                            </div>
+
+                        }
+                        @*<div id="openEnded">
+                                </div>
+                                <div style="padding-bottom:13%;">
+                                    <button id="addRow" type="button" class="btn btn-info" style="float:right;font-size: 10px;">Add a Question</button>
+                            </div>*@
+
+                        <div class=" col-lg-12">
+                            <label class="text-bold">Enter 1st Question<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control openEnd" placeholder="Enter Question here..." required autocomplete="off"><br>
+                        </div>
+                        <div class=" col-lg-12">
+                            <label class="text-bold">Enter 2nd Question<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control openEnd" placeholder="Enter Question here..." required autocomplete="off"><br>
+                        </div>
+
+                        <input id="ctsn" type="hidden" name="Cat_n_Scn" value="" />
+                        @*<div class="form-group">
+                                <label class="text-bold">Scenario 2<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter Your Scenario" required name="Scenario2">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-bold">Scenario 3<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter Your Scenario" required name="Scenario3">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-bold">Scenario 4<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter Your Scenario" required name="Scenario4">
+                            </div>*@
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" id="sub"><i class="fa fa-plus fa-solid"></i>&nbsp;&nbsp;&nbsp;Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    }
+    
+</div>
+<input type="hidden" value="@ViewBag.companyIdSurvey" id="ViewBagcompanyIdSurvey"/>
+<script type="text/javascript">
+    var ViewBagcompanyIdSurvey = $("#ViewBagcompanyIdSurvey").val();
+    $("#addRow").click(function () {
+        var html = '';
+        html += '<div class="row" style="margin-top:10px;">';
+        html += '<div class="col-lg-12">';
+        html += '<div id="inputFormRow">';
+        html += '<div class="form-group">';
+        html += '<div class="row">';
+
+        html += '<div class=" col-lg-12">';
+        html += '<label class="text-bold">Enter a Question<span class="text-danger">*</span></label>';
+        html += '<textarea type="text" class="form-control openEnd" placeholder="Enter Name here..." required autocomplete="off"></textarea><br>';
+        html += '</div>';
+
+        html += '<div class="input-group-prepend col-lg-2 col-md-2 col-sm-2 col-xs-2 bottom-right">';
+        html += '<div class="input-group-text" style="margin-top: 10px">';
+        html += '<a id="removeRow" class="btn btn-danger btn-rounded pl-5 pr-5" style="font-size: 10px;">Remove</a>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+
+        $('#openEnded').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '#removeRow', function () {
+        $(this).closest('#inputFormRow').remove();
+    });
+
+
+
+    $("#sub").click(function () {
+        debugger;
+        var Categories = [];
+        var Scenarios = [];
+
+        var getvalidate=document.getElementById("surveyform").reportValidity();
+        $(".cat").each(function () {
+            Categories.push($(this).val());
+        });
+        Categories.push("Open Ended Questions");
+
+        //for (let i = 1; i < 10; i++) {
+        for (let i = 1; i <= ViewBagcompanyIdSurvey; i++) {
+            var arr = [];
+            $(".sc_" + i).each(function () {
+                arr.push($(this).val());
+            });
+            Scenarios.push(arr);
+        }
+
+        //for openended questions
+        var openEndarr = [];
+        $(".openEnd").each(function () {
+            openEndarr.push($(this).val());
+        });
+        Scenarios.push(openEndarr);
+
+        //console.log(Categories);
+        //console.log(Scenarios);
+        var x = Scenarios.associate(Categories);
+        x = JSON.stringify(x);
+        $("#ctsn").val(x);
+        console.log(x);
+        if (getvalidate == true) {
+            $("#surveyform").submit();
+        }
+    });
+
+
+    getAllCompanies();
+    function getAllCompanies() {
+        $("#companiesLoader").show();
+        $.ajax({
+            type: "GET",
+            url: "../Admin/GetAllCompanies",
+            cache: false,
+            success: function(response)
+            {
+                var listAppend = "";
+                if (response != null && response.length > 0){
+                    for (var i = 0; i < response.length; i++) {
+                        listAppend += "<option value = '" + response[i].Id + "'>" + response[i].CompanyName + " </option>";
+                    }
+                 }
+                $("#CompanyId").append(listAppend);
+            },
+            error: function(response) {
+                $("#CompanyId").append("<option value=''>There's no Companies.</option>");
+            },
+            complete: function() {
+                $("#companiesLoader").hide();
+            }
+        });
+    }
+
+    function getCompanySurveys() {
+        $("#companiesLoader").show();
+        $.ajax({
+            type: "GET",
+            url: "../Admin/GetCompanySurvey",
+            cache: false,
+            success: function (response) {
+                var listAppend = "";
+                
+                
+                
+            },
+            error: function (response) {
+                $("#CompanyId").append("<option value=''>There's no Companies.</option>");
+            },
+            complete: function () {
+                $("#companiesLoader").hide();
+            }
+        });
+    }
+</script>
+
+<script>
+    function removeSpecialCharacters(val) {
+        debugger;
+        //var inputText = document.getElementById("survey_title").value;
+        //var outputText = inputText.replace(/[^\w\s]/gi, ''); // regex to remove special characters
+        //document.getElementById("output-text").textContent = outputText;
+
+        //const inputField = document.getElementById('survey_title');
+        const inputField = val;
+
+        inputField.addEventListener('input', () => {
+            // Remove all non-alphanumeric characters except spaces
+            inputField.value = inputField.value.replace(/[^a-zA-Z0-9 ,!$%&-/?():.;"" "''"]/g, '');
+        });
+
+    }
+</script>

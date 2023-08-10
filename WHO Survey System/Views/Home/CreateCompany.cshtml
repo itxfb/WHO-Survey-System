@@ -1,0 +1,448 @@
+﻿
+@{
+    ViewBag.Title = "Create Company";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- BEGIN PAGE BASE CONTENT -->
+<div class="row pt-20" style="min-height:600px">
+    <div class="col-md-8 col-md-offset-2 p-3">
+
+        <div class="panel panel-flat">
+            <div class="panel-heading text-center">
+                <h4 class="panel-title"><i class="fa fa-home"></i> <b><u>Add New Company</u></b></h4>
+                <div class="" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                    @ViewBag.Message
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <form action="@Url.Action("PostAddCompany","Admin")" id="company_form" method="post" enctype="multipart/form-data">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="control-label text-bold">Company Name<span class="text-danger">*</span>:</label>
+                            <div class="">
+                                <input type="text" class="form-control" id="name" name="CompanyName" onkeyup="ValidateName(this)" placeholder="Enter name" required>
+                                <div class="form-control-focus"> </div>
+                                <label class="control-label" id="msg"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-bold">Total Survey Categories<span class="text-danger">*</span>:</label>
+                            <div class="">
+                                <input type="number" class="form-control" id="TotalCompanySurvey" name="TotalCompanySurvey" placeholder="5" min="2" step="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-bold">Company Logo<span class="text-danger">*</span>:</label>
+                            <div class="">
+                                <input type="file" name="imageFiles" id="upload_file" title="Click to Upload your Company Logo type(jpeg,jpg,png). File Size Must be less then 2MB" accept=".jpeg,.jpg,.pdf,.png" onchange="loadfile(event)" class="form-control" required>
+
+                                <p style="color:red" id="larger_file"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-bold">Company Landing Page Data<span class="text-danger">*</span>:</label>
+                            <span class="text-danger" ><strong id="landingPage_Data"></strong></span>
+                            <div class="">
+                                <textarea id="txtarea" name="Company_LandingPageData" required>
+
+
+                             </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label text-bold">Company Demo Graphic Data Content<span class="text-danger">*</span>:</label>
+                            <span class="text-danger"><strong id="DemoGraphic_Data"></strong></span>
+
+                            <div class="">
+                                <textarea id="txtarea1" name="DemoGraphicData" required>
+
+
+                             </textarea>
+                            </div>
+                        </div>
+                        @*h1*@
+                    <div class="form-group" id="selections_div">
+                        <label class="control-label text-bold">
+                            Demo Graphic Data Selections: <span class="text-danger">(Note !Please enter values in this way: male,female,other)</span><br />
+                            @*<p class="text-danger">(Note !Please do not enter same text in all text fields.)</p>*@
+                        </label>
+                        <div class="">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="Which option best describes your gender?" class="form-control" id="name" name="Questions" placeholder="Enter Your Question" required>
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="Female,Male,Non-binary,Prefer not to respond" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other" required>
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+
+                        </div>
+
+                        <div class="">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="To which age group do you belong?" class="form-control" id="name" name="Questions" placeholder="Enter Your Question" required>
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="18-29,30-39,40-49,50-59,60 or greater" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other" required>
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+
+                        <div class="">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="With which race/ethnicity do you identify?" class="form-control" id="name" name="Questions" placeholder="Enter Your Question">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="American Indian or Alaska Native,Asian,Black or African American,Hispanic,Native Hawaiian or other Pacific Islander,White,Two or more races" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+
+                        <div class="">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="How many years have you worked at your organization?" class="form-control" id="name" name="Questions" placeholder="Enter Your Question">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="Less than 5 years,6-10 years,11-15 years,16-20 years,21 or more years" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+
+                        <div class="">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="Position/Job Classification" class="form-control" id="name" name="Questions" placeholder="Enter Your Question">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" value="Part-time faculty,Full-time/Tenured/Tenure track faculty,Staff,Administration" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other">
+                            <div class="form-control-focus"> </div>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div id="add_questions" class="parentdiv">
+
+                        </div>
+                        <strong class="text-danger" id="limit_Reached"></strong>
+
+                        <div>
+                            <button type="button" class="btn btn-primary" id="addQuestion">Add +</button>
+                            <button type="button" class="btn btn-primary" style="display:none;background-color:red" id="remove_btn">Remove -</button>
+
+                        </div>
+
+                        <label class="control-label text-bold" style="margin-top:8px;">
+                            <p class="text-danger">(Note! Please do not enter same text in all text fields.)</p>
+                        </label>
+                    </div>
+
+
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" readonly style="display:none" class="form-control" id="url1" name="CompanyUrl">
+                                </div>
+                                <div class="col-md-4">
+                                    <button disabled id="myBtn" class="btn btn-info btn-sm btn-block" onclick="GenerateUrl()" type="button">Generate Company Link</button>
+                                    <label class="col-md-offset-2 control-label" id="msg1" style="color: cornflowerblue;"></label>
+                                </div>
+                                <div class="col-md-2 col-md-offset-10">
+                                    <button type="button" onclick="validateAllInputs()" disabled id="submitBtn" class="btn-block btn btn-sm btn-success">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    CKEDITOR.replace('txtarea');
+    CKEDITOR.replace('txtarea1');
+
+
+    function GenerateUrl() {
+        var name = document.getElementById('name').value;
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: '../Admin/GenerateUrl',
+            data: { companyName: name },
+            //traditional: true,
+            success: function (response) {
+
+                if (response == "") {
+                    $("#msg").html("Url cannot be generated for this name of the company. Please enter another name.");
+                    $("#msg").addClass("text-danger");
+                    $(':input[type="submit"]').prop('disabled', true);
+                }
+                else {
+                    $('#url1').show();
+                    $('#url1').val(response);
+                    $('#url').attr('href', response);
+                    $('#url').attr('target', '_blank');
+                    $('#url').html(response);
+                    $("#myBtn").prop("disabled", true);
+                    $("#submitBtn").prop("disabled", false);
+                }
+
+            },
+            error: function (response) {
+                alert('Error');
+            }
+        });
+    }
+
+    function ValidateName(val) {
+
+        // using regex
+
+        const inputField = val;
+
+        inputField.addEventListener('input', () => {
+            // Remove all non-alphanumeric characters except spaces
+            inputField.value = inputField.value.replace(/[^a-zA-Z0-9  ]/g, '');
+        });
+
+        //regex ending
+
+
+        var Companyname = document.getElementById('name').value;
+        $.ajax({
+            dataType: "json",
+            type: "POST",
+            url: '../Admin/validateCampanyName',
+            data: { Name: Companyname },
+            //traditional: true,
+            success: function (response) {
+                if (response == 0) {
+                    $("#msg").html("Company having this name already exist. Please enter a new Company name.");
+                    $("#msg").removeClass("text-success");
+                    $("#msg").addClass("text-danger");
+                    $("#myBtn").prop("disabled", true);
+                }
+                else if (response == 2) {
+                    $('#url1').hide();
+                    $("#msg").html("Please enter a new valid name.");
+                    $("#msg").removeClass("text-success");
+                    $("#msg").addClass("text-danger");
+                    $("#myBtn").prop("disabled", true);
+                }
+                else {
+                    $("#msg").removeClass("text-danger");
+                    $("#msg").addClass("text-success");
+                    $("#msg").html("Company name is available.");
+                    $("#myBtn").prop("disabled", false);
+                }
+                $("#submitBtn").prop("disabled", true);
+            },
+            error: function (response) {
+                alert('Error');
+            }
+        });
+    }
+</script>
+<script>
+
+
+    $("#addQuestion").click(function () {
+
+        debugger;
+        var divs = $(".count");
+
+        // get the count of the selected div elements
+        var count = divs.length;
+        if (count == 2) {
+            $("#limit_Reached").text("You Can Add Seven Questions And Values Only!");
+            return
+        }
+
+
+        var Selectiondata = `<div class="child-div">
+                              <div class="count">
+                            <label class="control-label text-bold">Question<span class="text-danger">*</span>?</label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control" id="name" name="Questions" placeholder="Enter Your Question" required>
+                            <label class="control-label" id="msg"></label>
+                        </div>
+                        <div class="">
+                            <label class="control-label text-bold">Values<span class="text-danger">*</span></label>
+                            <input type="text" onkeyup="removeSpecialCharacters(this)" class="form-control" id="name" name="values" placeholder="Enter Your Question Values e.g male,female,other" required>
+                            <label class="control-label" id="msg"></label>
+
+                        </div>
+                        </div>`;
+
+
+
+        $("#add_questions").append(Selectiondata);
+
+        $("#remove_btn").show();
+
+
+
+    });
+
+</script>
+
+<script>
+    function loadfile(event) {
+        debugger;
+        var output;
+        var size = event.target.files[0].size / 1024 / 1024;
+        size = size.toFixed(2);
+        if (size > 2.01) {
+
+            document.getElementById("upload_file").value = "";
+
+            $("#larger_file").text("Please select a file less than 2mb!");
+
+            $("#larger_file").fadeOut(4000);
+            return;
+        }
+
+    }
+</script>
+
+
+
+<script>
+    function validateAllInputs() {
+        debugger;
+        var inputs = document.querySelectorAll('input[type="text"]');
+        var values = [];
+        var isDuplicate = false;
+        var Textarea = document.getElementById("txtarea");
+        var Textareaeditor = CKEDITOR.instances[Textarea.id];
+        var TextAreaValue = Textareaeditor.getData();
+
+
+        //
+        var Textarea1 = document.getElementById("txtarea1");
+        var Textareaeditor1 = CKEDITOR.instances[Textarea1.id];
+        var TextAreaValue1 = Textareaeditor1.getData();
+
+        for (var i = 0; i < inputs.length; i++) {
+            var value = inputs[i].value.trim();
+
+            if (value !== "") {
+                if (values.includes(value)) {
+                    isDuplicate = true;
+                    break;
+                } else {
+                    values.push(value);
+                }
+            }
+        }
+
+        if (isDuplicate) {
+            alert("Please enter different text in all input fields.");
+            return false;
+        }
+
+        //if (TextAreaValue != "" || TextAreaValue != null) {
+        //    $("#company_form").submit();
+        //    return true;
+
+
+        //}
+
+        if (TextAreaValue.trim() === "") {
+
+            //$("#landingPage_Data").text("Please enter your data in this textarea!");
+            alert('Please enter text in company landing page field!');
+        }
+
+        else if (TextAreaValue1.trim() === "") {
+
+            //$("#DemoGraphic_Data").text("Please enter your data in this textarea!");
+            alert('Please enter your text in demo graphic data field!');
+
+        }
+
+        else
+        {
+            $("#company_form").submit();
+            return true;
+
+        }
+
+       
+
+    }
+
+
+    //$('#remove_btn').click(function () {
+    //    debugger;
+    //    $('.parentdiv div:last-child').remove();
+    //});
+
+    $('#remove_btn').click(function () {
+        $("#limit_Reached").text("");
+
+        var divs = $(".count");
+
+        // get the count of the selected div elements
+        var count = divs.length;
+        if (count == 1) {
+            $("#remove_btn").hide();
+
+
+        }
+
+        debugger;
+        $('.parentdiv').each(function () {
+            $(this).children(':last').remove(); // remove last div
+            //$(this).children(':last').remove(); // remove second last div
+        });
+    });
+
+
+
+</script>
+
+
+<script>
+    function removeSpecialCharacters(val) {
+        debugger;
+
+        const inputField = val;
+
+        inputField.addEventListener('input', () => {
+            // Remove all non-alphanumeric characters except spaces
+            inputField.value = inputField.value.replace(/[^a-zA-Z0-9 ,!$%&-/?().:;"" "''"]/g, '');
+        });
+
+    }
+</script>
+
+
+
+
+
+
+

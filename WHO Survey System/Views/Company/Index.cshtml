@@ -1,0 +1,273 @@
+﻿@model WHO_Survey_System.Models.Company
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LandingPageLayout.cshtml";
+}
+
+<style>
+    .badge a {
+        color: #fff !important;
+    }
+    .custome-html h1 {
+        color: #fff;
+    }
+
+    .custome-html h2 {
+        color: #fff;
+    }
+
+    .custome-html h3 {
+        color: #fff;
+    }
+
+    .custome-html h4 {
+        color: #fff;
+    }
+
+    .custome-html h5 {
+        color: #fff;
+    }
+
+    .custome-html h6 {
+        color: #fff;
+    }
+</style>
+
+<section id="hero-6" class="bg-scroll division mt-5" style="padding-top:130px !important; padding-bottom:200px!important;">
+    <div class="container white-color">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-7">
+                <div class="hero-txt mb-40">
+
+                    <a href="https://www.deiready.com" target="_blank">
+
+                        <img class="mb-4 who-logo" src="~/Content/landingPage_Files/images/logo-who.png">
+                        @*<img class="mb-4 who-logo"  src="@Model.CompanyLogo"><br />*@
+
+                      </a>
+                        <div id="landingPageData" class="custome-html">
+                            @Html.Raw(Model.Company_LandingPageData)
+                        </div>
+
+
+                        @*<h3 class="h3-xs">Welcome to the Diagnostic Survey of Institutional Culture at the WHO.</h3>
+            <p style="font-size:18px;">
+
+                The survey is intended to provide a better understanding of the organizational culture in WHO that is directly or indirectly linked to sexual exploitation, abuse and harassment (SEAH).
+                The survey is available in the following languages:
+                <u>Arabic, Chinese, English, French, Portuguese, Russian and Spanish</u>.
+            </p>*@
+
+                        @*<h5> The survey is divided into two sections: </h5>
+
+            <ul class="content-list">
+                <li>
+                    <p class="p-md">In the first section, we will ask you to enter demographic data.</p>
+                </li>
+                <li>
+                    <p class="p-md">The second section is the Diagnostic Survey of Institutional Culture at WHO.
+                </li>
+            </ul>*@
+
+                </div>
+</div>
+
+<div class="col-md-5">
+<div class="hero-form text-center mb-40">
+<div class="text-center pl-2 text-semibold mr-10 ml-10" style="background:#fff; color: red; font-size:15px;" id="alertMsg">
+@ViewBag.msg
+</div>
+
+<form class="row bg-blue" action="@Url.Action("Access","Company")" method="post"
+style="padding: 19px 35px; margin: 0 10px 0 10px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+<div class="col-md-12">
+@*<i class="fa fa-arrow-circle-o-right mb-3" style="font-size:40px;"></i>*@
+    <h4 class="h4-xl mb-4">Click on the Next button to proceed </h4>
+</div>
+<div class="col-md-12">
+                                                                        @*<input type="hidden" name="Id" value="@Model.Id" />*@
+                 <input type = "hidden" name="Id" value="@ViewBag.CompanyId" />
+                 <button type = "submit" id="btnclck" class="btn btn-md btn-theme tra-hover">NEXT</button>
+             </div>
+         </form>
+
+         <p class="mt-4 ml-4" align="center">
+             <h4>
+                 <span style = "font-size:16px; font-weight:300;" >
+                     For more information regarding confidentiality
+                 </span>
+                 <span class="badge badge-secondary btn-theme tra-hover">
+                     <a href = "#" data-toggle="modal" data-target="#exampleModalCenter">
+                         Click Here
+                     </a>
+                 </span>
+             </h4>
+         </p>
+     </div>
+ </div>
+</div>
+</div>
+</section>
+
+<!--Confidential Modal Start-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal-content">
+ <div class="modal-header">
+     <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Confidentiality Information</h5>
+     <button type = "button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+     </button>
+ </div>
+
+ <div class="modal-body" style="height:auto;">
+     <p align = "justify" style="color:#000 !important;">
+         This survey is administered by DEI Ready. The survey does not record personal details. All responses to the survey
+         will remain strictly anonymous and confidential and will be aggregated to construct a snapshot of the organizational culture
+         at your organization.
+     </p>
+ </div>
+
+ <div class="modal-footer">
+     <button type = "button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+ </div>
+</div>
+</div>
+</div>
+<!-- End Confidential Modal -->
+
+<!-- Missing Value Modal Start -->
+<div class="modal fade" id="SurveySubmitted" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal-content">
+ <div class="modal-header">
+     <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Note : </span></h5>
+     <button type = "button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+     </button>
+ </div>
+
+ <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+     <div class="d-flex justify-content-center mb-3">
+         <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+     </div>
+
+     <p align = "center" style="color:#000 !important;">
+         Your answers to this survey have already been recorded.
+         <h5 align = "center" >< strong > Thank you!</strong></h5>
+     </p>
+ </div>
+
+ <div class="modal-footer">
+     <button type = "button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+ </div>
+</div>
+</div>
+</div>
+<!-- End Missing Value Modal -->
+
+<!-- Survey Closed Modal -->
+<div class="modal fade" id="SurveyClosed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;width:auto!important;">
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+<div class="modal-content">
+
+ <div class="modal-header">
+     <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Note : </span></h5>
+     <button type = "button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+     </button>
+ </div>
+
+ <div class="modal-body" style="height: 70vh !important; overflow-y:scroll;">
+
+     <div class="d-flex justify-content-center mb-3">
+         <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+     </div>
+
+     <p align = "center" style="color:#000 !important;">
+         <h5 align = "center" >< strong class="mb-2">Thank you for your participation.The survey window is now closed.</strong></h5>
+     </p>
+ </div>
+
+ <div class="modal-footer">
+     <button type = "button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+ </div>
+
+</div>
+</div>
+</div>
+<!-- Survey Closed Modal -->
+
+
+<script>
+
+                                                                        @*$(window).on('load', function () {
+        if ('@ViewBag.isSubmit' == "1") {
+            $('#SurveySubmitted').modal('show');
+        }
+        //$("#btnclck").remove();
+        //$('#SurveyClosed').modal('show');
+    });
+
+    $('#alertMsg').fadeOut(9000);
+
+    if("@ViewBag.msg" == "The survey is now closed. Thank you for your participation.")
+    {
+        $("#btnclck").remove();
+        $('#SurveyClosed').modal('show');
+    }*@
+
+
+function ChangeLanguage(value)
+                                                                                {
+ if (value != "")
+                                                                                    {
+     $.ajax({
+         type: 'POST',
+         url: "../Home/CheckLanguage",
+         dataType: "json",
+         data:
+                                                                                            {
+             lang: value
+         },
+         success: function(response) {
+             location.reload();
+         },
+         error: function() {
+             alert("ajax failed");
+         }
+     });
+ }
+}
+                                                                            </script>
+
+                                                                            <script>
+
+                                                                                //function ConfidentialInfo() {
+                                                                                //    $('#exampleModalCenter').modal('show');
+                                                                                //}
+
+
+                                                                                //$('#btnclck').click(function () {
+                                                                                //    var getval = $("#inlineFormCustomSelect1").find(":selected").text();
+                                                                                //    var Email = document.getElementById("Email").value;
+                                                                                //    var Passcode = document.getElementById("Passcode").value;
+                                                                                //    console.log(Email + " " + Passcode);
+                                                                                //    window.open('../Home/LandingPage?Lang=' + getval + '&Email=' + Email + '&Passcode=' + Passcode, "_parent");
+                                                                                //});
+
+                                                                            </script>
+                                                                            <script>
+                                                                                //LandingPageData();
+                                                                                function LandingPageData() {
+                                                                                    debugger;
+
+                                                                                    var Content = '<p>Hello Word</p>';
+                                                                                    $("#landingPageData").innerHTML(Content);
+                                                                                    //var element = document.getElementById("landingPageData");
+                                                                                    //element.innerHTML = Content;
+
+                                                                                }
+
+                                                                            </script>

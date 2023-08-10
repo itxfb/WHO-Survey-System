@@ -1,0 +1,278 @@
+﻿
+@{
+    ViewBag.Title = "Share Survey Link";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="min-height:700px;">
+    <form action="../Admin/PostAddShareLink" method="post">
+        <div class="modal fade" id="updateModal">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="text-center text-bold">Recipient List</h5>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*<form action="@Url.Action("PostUpdateRecipient","Admin")" method="post">*@
+                        <div style="font-weight:bold; font-size:15px; color:@ViewBag.Color ; margin-left:10px;" id="alertMsg">
+                            @ViewBag.Message
+                        </div>
+                        <div class="datatable-scroll table-bordered p-10">
+
+                            <table class="table no-footer table-responsive table-striped" id="userTable">
+                                <thead class="bg-blue-400">
+                                    <tr>
+                                        <th></th>
+                                        <th class="text-bold">
+                                            <input type="checkbox" id="checkAll" onchange='Checkthis(this)' />
+                                        </th>
+                                        <th class="text-bold">
+                                            Full Name
+                                        </th>
+                                        <th class="text-bold">
+                                            Email
+                                        </th>
+                                        <th class="text-bold">
+                                            Institution
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Share&nbsp;&nbsp;<i class="fa fa-solid fa-arrow-right"></i></button>
+                            </div>
+
+                        </div>
+
+                        @*<div class="modal-footer">
+                                <button type="submit" value="submit" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>*@
+                        @*</form>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        @*<form action="@Url.Action("PostAddShareLink", "Admin")" method="post">*@
+        <div class="row m-10">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <div class="text-left" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                            @ViewBag.Message
+                        </div>
+                        <h4 class="panel-title" align="center"><b><u>Share Survey Link</u></b></h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <input type="hidden" class="form-control" readonly required name="UserId" value="@ViewBag.userId">
+
+                        <div class="form-group">
+                            <label id="random_nolbl" class="text-danger"></label><br />
+
+                            <label for="modal-Type" class="col-form-label text-bold">Survey<span class="text-danger">*</span></label>
+                            <select class="form-control selectpicker" tabindex="-1" aria-hidden="true" name="SurveyId" id="searchSurvey" required data-live-search="true" @*onchange="surveyId(this)"*@>
+                                <option value="">Select Survey Title</option>
+                                @foreach (var item in ViewBag.surveylist)
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modal-Type" class="col-form-label text-bold">Email Editor<span class="text-danger">*</span></label><br />
+                            <textarea class="ckeditor" id="editor1" name="MailBody">@ViewBag.email</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modal-Type" class="col-form-label text-bold">Institute<span class="text-danger">*</span></label>
+                            <select class="form-control selectpicker" tabindex="-1" aria-hidden="true" name="Institution" id="searchInstitute" onkeyup="checkInstitute()" required data-live-search="true" @*onchange="surveyId(this)"*@>
+                                <option value="">Select Institute Title</option>
+                                @foreach (var item in ViewBag.institutelist)
+                                {
+
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="text-right">
+                            <a class="btn btn-primary" onclick="SearchRecipient()">Get Recipient</a>
+                            @*<button type="submit" class="btn btn-primary" id="sub">Share&nbsp;&nbsp;<i class="fa fa-solid fa-arrow-right"></i></button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="ids" id="Arrayhid" />
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script type="text/javascript">
+    $('select').selectpicker();
+
+    function SearchRecipient() {
+        var surveyId = document.getElementById("searchSurvey").value;
+        var institution = document.getElementById("searchInstitute").value;
+        //console.log(institution + "   " + surveyId);
+
+        if (institution != null && institution != "" && surveyId > 0) {
+
+            $('#updateModal').modal('show');
+
+            $('#userTable').DataTable().clear();
+            $('#userTable').DataTable().destroy();
+
+
+
+            $('#userTable').DataTable(
+                {
+                    "ajax":
+                    {
+                        "url": '@Url.Action("GetRecipientList", "Admin")',
+                        "type": "POST",
+                        "datatype": "json",
+                        "data": { institution: institution }
+                    },
+                    'columns':
+                        [
+                            { "data": "hidden", "name": "0" },
+                            { "data": "Institution", "name": "Institution" },
+                            { "data": "FirstName", "name": "FirstName" },
+                            { "data": "Email", "name": "Email" },
+                        ],
+                    'columnDefs':
+                        [
+                            {
+                                "targets": 0,
+                                "visible": false,
+                                "searchable": false,
+                                "orderable": false,
+                                "render": function (data, type, full, meta) {
+                                    //console.log(full);
+                                    return null;
+                                }
+                            },
+                            {
+                                "targets": 1,
+                                'className': 'col-lg-3',
+                                "orderable": false,
+                                "render": function (data, type, full, meta) {
+                                    if (arr.includes(full.Id.toString())) {
+                                        return `<input type='checkbox' onchange='Checkthis(this)' class='book' value = '${full.Id}' checked='true'>`;
+                                    }
+                                    else {
+                                        return `<input type='checkbox' onchange='Checkthis(this)' class='book' value = '${full.Id}'>`;
+                                    }
+                                }
+                            },
+                            {
+                                "targets": 2,
+                                'className': 'col-lg-3',
+                                "orderable": false,
+                                "render": function (data, type, full, meta) {
+                                    return full.FirstName + ' ' + full.LastName;
+                                }
+                            },
+                            {
+                                "targets": 3,
+                                'className': 'col-lg-3',
+                                "orderable": false,
+                                "render": function (data, type, full, meta) {
+                                    return full.Email;
+                                }
+                            },
+                            {
+                                "targets": 4,
+                                'className': 'col-lg-3',
+                                "orderable": false,
+                                "render": function (data, type, full, meta) {
+                                    return full.Institution;
+                                }
+                            }
+                        ],
+                    "serverSide": "true",
+                    "processing": "true",
+                    "bPaginate": false,
+                    "bInfo": false,
+                    "language":
+                    {
+                        "processing": "<img src='../Content/assets/images/loading.gif' width='100'/>",
+                        "search": "<span>Search :</span> _INPUT_",
+                        "searchPlaceholder": "Filter Name/Email",
+                        //"lengthMenu": "<span>Show :</span> _MENU_",
+                        //"paginate": { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+                    },
+                }
+            );
+        }
+        else
+        {
+            $("#random_nolbl").text("All fields are mandatory.").delay(5000).fadeOut();
+        }
+    }
+
+
+
+    //$("#checkAll").click(function () {
+    //    if ($("#checkAll").is(':checked')) {
+    //        $(".book").prop("checked", true);
+    //    } else {
+    //        $(".book").prop("checked", false);
+    //    }
+    //});
+
+    var arr = [];
+    function Checkthis(val) {
+        //console.log(val.id);
+        if (val.id == "checkAll") {
+            if ($(val).is(':checked')) {
+                $(".book").prop("checked", true);
+            } else {
+                $(".book").prop("checked", false);
+            }
+        }
+        else
+        {
+            var getval = val.value;
+            var chkall = "#checkAll";
+            if ($(chkall).is(':checked') == true) {
+
+                $(chkall).prop("checked", false);
+            }
+            if ($(val).is(":checked")) {
+                if (!arr.includes(getval)) {
+                    arr.push(getval);
+                }
+            }
+            else {
+                arr.splice($.inArray(getval, arr), 1);
+                //arr.pop(getval);
+
+            }
+        }
+        $("#Arrayhid").val(arr);
+        console.log(arr);
+    }
+    $("input[type='checkbox']").on('change', function () {
+
+        arr = [];
+        /*arryCheckboxes.push(id);*/
+        $(".book:checked").each(function () {
+            // alert($(this).val());
+            arr.push($(this).val());
+        });
+        $("#Arrayhid").val(arr);
+        console.log(arr);
+    });
+
+</script>

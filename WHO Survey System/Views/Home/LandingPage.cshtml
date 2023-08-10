@@ -1,0 +1,917 @@
+﻿
+@{
+    ViewBag.Title = "Landing Page";
+    Layout = "~/Views/Shared/_LandingPageLayout.cshtml";
+    //ViewBag.lang = ProjectVariables.lang;
+
+    //Get Cookies And Its Value
+    HttpCookie myCookie = Request.Cookies["LanguageCookie"];
+    if (myCookie != null)
+    {
+        ViewBag.lang = myCookie["lang"];
+    }
+}
+
+<style>
+    .badge a {
+        color: #fff !important;
+    }
+</style>
+
+<section id="hero-6" class="bg-scroll division mt-5" style="padding-top:130px !important; padding-bottom:200px!important;">
+    <div class="container white-color">
+        <div class="row d-flex align-items-center">
+
+
+            
+            <div class="col-md-12">
+                <div class="hero-txt mb-40">
+
+
+                    @* <img class="mb-4 who-logo" src="~/Content/landingPage_Files/images/logo.png">*@
+                    <a href="https://www.deiready.com" target="_blank">
+                        <img class="mb-4 who-logo" src="~/Content/landingPage_Files/images/logo-who.png">
+                        </a>
+
+                        @if (ViewBag.lang == "" || ViewBag.lang == "English")
+                        {
+                            <h3 class="h3-xs">Welcome to the Diagnostic Survey of Institutional Culture.</h3>
+                            <p style="font-size:18px;">
+
+                                The survey is intended to provide a better understanding of the cultural characteristics present at your organization.  @*that is directly or indirectly linked to sexual exploitation, abuse and harassment (SEAH).
+                                The survey is available in the following languages:
+                                <u>Arabic, Chinese, English, French, Portuguese, Russian and Spanish</u>.*@
+                            </p>
+                            @*<h5>The survey is divided into two sections: </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">In the first section, we will ask you to enter demographic data.</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">The second section is the Diagnostic Survey of Institutional Culture at WHO.
+                                </li>
+                            </ul>*@
+                        }
+                        @if (ViewBag.lang == "Portuguese")
+                        {
+                            <h3 class="h3-xs">Bem-vindo ao Inquérito de diagnóstico da cultura institucional na OMS.</h3>
+                            <p style="font-size:18px;">
+                                O inquérito destina-se a proporcionar uma melhor compreensão da cultura organizacional na OMS que está direta ou indiretamente ligada à exploração, abuso e assédio sexual (EAAS).
+                                O inquérito está disponível nos seguintes idiomas: <u>árabe, chinês, espanhol, francês, inglês, português e russo.</u>.
+                            </p>
+
+                            <h5>O inquérito está dividido em duas secções: </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">Na primeira secção, pedimos-lhe que introduza dados demográficos.</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">A segunda secção é o Inquérito de diagnóstico da cultura institucional na OMS.
+                                </li>
+                            </ul>
+                        }
+                        @if (ViewBag.lang == "Spanish")
+                        {
+                            <h3 class="h3-xs">Le damos la bienvenida a la Encuesta de Diagnóstico de la Cultura Institucional de la OMS.</h3>
+                            <p style="font-size:18px;">
+                                El objetivo de la encuesta es proporcionar una visión más clara de la cultura organizativa de la OMS que está directa o indirectamente vinculada a la explotación, el abuso y el acoso sexuales (SEAH).
+                                La encuesta está disponible en los siguientes idiomas: <u>árabe, chino, inglés, francés, portugués, ruso y español</u>.
+                            </p>
+
+                            <h5>La encuesta se divide en dos secciones: </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">En la primera sección, le pediremos que introduzca sus datos demográficos.</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">La segunda sección es la Encuesta de Diagnóstico de la Cultura Institucional de la OMS.
+                                </li>
+                            </ul>
+                        }
+                        @if (ViewBag.lang == "French")
+                        {
+                            <h3 class="h3-xs">Bienvenue dans l’enquête diagnostique sur la culture institutionnelle au sein de l’OMS.</h3>
+                            <p style="font-size:18px;">
+                                L’enquête vise à mieux comprendre la culture organisationnelle au sein de l’OMS, directement ou indirectement liée à l’exploitation, aux abus et au harcèlement sexuels (EASH).
+                                L’enquête est disponible dans les langues suivantes : <u>arabe, chinois, anglais, français, portugais, russe et espagnol</u>.
+                            </p>
+
+                            <h5>L’enquête est divisée en deux parties : </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">Dans la première partie, nous vous demanderons de saisir des données démographiques.</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">La deuxième partie correspond à l’enquête diagnostique sur la culture institutionnelle au sein de l’OMS.
+                                </li>
+                            </ul>
+                        }
+                        @if (ViewBag.lang == "Arabic")
+                        {
+                            <h3 class="h3-xs">مرحبًا بك في الاستبيان الاستقصائي للثقافة المؤسسية في منظمة الصحة العالمية</h3>
+                            <p style="font-size:18px;">
+
+                                الهدف من الاستبيان هو تقديم فهم أفضل للثقافة المؤسسية في منظمة الصحة العالمية التي ترتبط بشكل مباشر أو غير مباشر بالاستغلال والاعتداء والتحرش الجنسي
+                                <u> العربية والصينية والإنجليزية والفرنسية والبرتغالية والروسية والإسبانية</u>
+                                يتوفر الاستبيان باللغات التالية
+                            </p>
+
+                            <h5>:ينقسم الاستبيان إلى قسمين </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">في القسم الأول، سنطلب منك إدخال بيانات ديموغرافية</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">والقسم الثاني هو الاستبيان الاستقصائي للثقافة المؤسسية في منظمة الصحة العالمية
+                                </li>
+                            </ul>
+                        }
+                        @if (ViewBag.lang == "Chinese")
+                        {
+                            <h3 class="h3-xs">欢迎参加世界卫生组织的制度文化诊断调查。</h3>
+                            <p style="font-size:18px;">
+                                该调查旨在更好地了解世界卫生组织中直接或间接与性剥削、性虐待和性骚扰 (SEAH) 有关的组织文化。
+                                本调查以下列语言提供 : <u>阿拉伯语、中文、英语、法语、葡萄牙语、俄语和西班牙语。</u>
+                            </p>
+
+                            <h5>调查分为两个部分： </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">在第一部分中，我们将要求您输入人口统计数据。</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">第二部分是世界卫生组织的制度文化诊断调查。
+                                </li>
+                            </ul>
+                        }
+                        @if (ViewBag.lang == "Russian")
+                        {
+                            <h3 class="h3-xs">Добро пожаловать в диагностическое обследование институциональной культуры ВОЗ.</h3>
+                            <p style="font-size:18px;">
+                                Опрос предназначен для лучшего понимания корпоративной культуры в ВОЗ, прямо или косвенно связанной с сексуальной эксплуатацией, насилием и домогательствами (SEAH — sexual exploitation, abuse and harassment).
+                                Опрос доступен на следующих языках: <u>арабский, китайский, английский, французский, португальский, русский и испанский</u>.
+                            </p>
+
+                            <h5>Опрос состоит из двух разделов: </h5>
+
+                            <ul class="content-list">
+                                <li>
+                                    <p class="p-md">В первом разделе мы попросим вас ввести демографические данные.</p>
+                                </li>
+                                <li>
+                                    <p class="p-md">Второй раздел — это диагностический опрос о корпоративной культуре в ВОЗ.
+                                </li>
+                            </ul>
+                        }
+
+                </div>
+            </div>
+            
+
+        
+            <!--<div class="col-md-5">
+                <div class="hero-form text-center mb-40">
+
+                    <div class="text-left pl-2" style="color: red; font-size:15px;" id="alertMsg">
+                        @ViewBag.msg
+                    </div>
+                    <form class="row bg-blue" action="@Url.Action("Index","Home")" method="post" style="padding: 19px 35px; margin: 0 10px 0 10px; border-radius: 4px; box-shadow: 0 0 15px rgb(0 0 0 / 30%);">
+
+                        if (ViewBag.lang == "English" || ViewBag.lang == "")
+                        {
+                            <div class="col-md-12">
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Select Language:</h4>
+                            </div>
+
+
+                            <label>Language : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English" selected>English</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="Chinese">Chinese</option>
+                                    <option value="French">French</option>
+                                    <option value="Portuguese">Portuguese</option>
+                                    <option value="Russian">Russian</option>
+                                    <option value="Spanish">Spanish</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12">-->
+                                @*<input type="hidden" value="@ViewBag.SurveyId" id="SurveyId" />
+                    <input type="hidden" value="@ViewBag.RecpID" id="RecpID" />
+                    <input type="hidden" value="@ViewBag.Email" name="Email" />
+                    <input type="hidden" value="@ViewBag.Passcode" name="Passcode" />*@
+                                <!--<button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">NEXT</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Portuguese")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Selecione o idioma</h4>
+                            </div>
+
+                            <label>Idioma : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">Inglês</option>
+                                    <option value="Arabic">Árabe</option>
+                                    <option value="Chinese">Chinês</option>
+                                    <option value="French">Francês</option>
+                                    <option value="Portuguese" selected>Português</option>
+                                    <option value="Russian">Russo</option>
+                                    <option value="Spanish">Espanhol</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">SEGUINTE</button>
+                            </div>
+                        }
+                        @if (ViewBag.lang == "Spanish")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Seleccione un idioma</h4>
+                            </div>
+
+                            <label>Idioma : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">Inglés</option>
+                                    <option value="Arabic">Árabe</option>
+                                    <option value="Chinese">Chino</option>
+                                    <option value="French">Francés</option>
+                                    <option value="Portuguese">Portuguese</option>
+                                    <option value="Russian">Ruso</option>
+                                    <option value="Spanish" selected>Español</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">SIGUIENTE</button>
+                            </div>
+
+                        }
+                        @if (ViewBag.lang == "French")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Sélectionnez la langue</h4>
+                            </div>
+
+                            <label>Langue : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">Anglais</option>
+                                    <option value="Arabic">Arabe</option>
+                                    <option value="Chinese">Chinois</option>
+                                    <option value="French" selected>Français</option>
+                                    <option value="Portuguese">Portugais</option>
+                                    <option value="Russian">Russe</option>
+                                    <option value="Spanish">Espagnol</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">SUIVANT</button>
+                            </div>
+
+                        }
+                        @if (ViewBag.lang == "Arabic")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">اختر اللغة</h4>
+                            </div>
+
+                            <label>اللغة : </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">الإنجليزية</option>
+                                    <option value="Arabic" selected>العربية</option>
+                                    <option value="Chinese">الصينية</option>
+                                    <option value="French">الفرنسية</option>
+                                    <option value="Portuguese">البرتغالية</option>
+                                    <option value="Russian">الروسية</option>
+                                    <option value="Spanish">الإسبانية</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">التالي</button>
+                            </div>
+
+                        }
+                        @if (ViewBag.lang == "Chinese")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">选择语言</h4>
+                            </div>
+
+                            <label>语言： </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">英语</option>
+                                    <option value="Arabic">阿拉伯语</option>
+                                    <option value="Chinese" selected>中文</option>
+                                    <option value="French">法语</option>
+                                    <option value="Portuguese">葡萄牙语</option>
+                                    <option value="Russian">俄语</option>
+                                    <option value="Spanish">西班牙语</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">下一步</button>
+                            </div>
+
+                        }
+                        @if (ViewBag.lang == "Russian")
+                        {
+                            <div class="col-md-12">
+                                
+                                <i class="fa fa-language mb-3" style="font-size:40px;"></i>
+                                <h4 class="h4-xl mb-4">Выберите язык</h4>
+                            </div>
+
+                            <label>Языки: </label>
+                            <div id="input-subject" class="col-md-12 col-lg-12 input-subject mb-3">
+                                <select id="inlineFormCustomSelect1" name="Lang" class="custom-select subject valid" onchange="ChangeLanguage(this.value)">
+                                    <option value="English">Английский</option>
+                                    <option value="Arabic">Арабский</option>
+                                    <option value="Chinese">Китайский</option>
+                                    <option value="French">Французский</option>
+                                    <option value="Portuguese">Португальский</option>
+                                    <option value="Russian" selected>Русский</option>
+                                    <option value="Spanish">Испанский</option>
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                <button type="submit" id="btnclck" class="btn btn-md btn-theme tra-hover">Далее</button>
+                            </div>
+
+                        }
+                    </form>
+
+                    <p class="mt-4 ml-4" align="center">
+                        <h4>
+                            @if (ViewBag.lang == "English" || ViewBag.lang == "")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    For more information regarding confidentiality
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Click Here
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "Portuguese")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    Para obter mais informações sobre confidencialidade,
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        clique aqui
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "Spanish")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    Para obtener más información sobre la confidencialidad,
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        haga clic aquí
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "French")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    Pour plus d’informations concernant la confidentialité,
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        cliquez ici
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "Arabic")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    لمزيد من المعلومات حول السرية
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        انقر هنا
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "Chinese")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    有关保密的更多信息,
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        请单击此处
+                                    </a>
+                                </span>
+                            }
+                            @if (ViewBag.lang == "Russian")
+                            {
+                                <span style="font-size:16px; font-weight:300;">
+                                    Для получения дополнительной информации о конфиденциальности
+                                </span>
+                                <span class="badge badge-secondary btn-theme tra-hover">
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                        нажмите здесь
+                                    </a>
+                                </span>
+                            }
+                        </h4>
+                    </p>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</section>
+    
+<!--Confidential Modal Start-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            @if (ViewBag.lang == "English" || ViewBag.lang == "")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Confidentiality Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: auto;">
+                    <p align="justify" style="color:#000 !important;">
+                        This survey is administered by DEI Ready. The survey does not record personal details. All responses to the survey
+                        will remain strictly anonymous and confidential and will be aggregated to construct a snapshot of the organizational culture
+                        at your organization.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Portuguese")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Informações de confidencialidade</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Perto">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        Este inquérito é administrado por um prestador de serviços externo: Center for Asia Leadership Initiatives e respetiva subcontratada, a DEI Ready.
+                        O ficheiro de dados residirá fora da OMS, numa plataforma separada, junto do prestador de serviços externo.
+                        Ninguém na OMS terá acesso ao ficheiro.  O inquérito não guarda quaisquer dados pessoais.
+                        Todas as respostas ao inquérito permanecerão estritamente anónimas e confidenciais e serão agregadas para criar um instantâneo da cultura organizacional na OMS.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Spanish")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Información sobre la confidencialidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="cerca">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        Esta encuesta la administra un proveedor de servicios externo: Center for Asia Leadership Initiatives y su subcontratista DEI Ready.
+                        El archivo de datos quedará alojado fuera de la OMS con el proveedor de servicios externo en una plataforma independiente.
+                        Ningún miembro interno de la OMS tendrá acceso a él. La encuesta no registra ningún dato personal.
+                        Todas las respuestas a la encuesta serán estrictamente anónimas y confidenciales, y se recopilarán para crear una visión de la cultura organizativa de la OMS.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+            }
+            @if (ViewBag.lang == "French")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Informations concernant la confidentialité</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="proche">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        Cette enquête est gérée par un prestataire de services externe : Center for Asia Leadership Initiatives et son sous-traitant DEI Ready.
+                        Le fichier de données résidera en dehors de l’OMS auprès du fournisseur de services externe sur une plateforme distincte.
+                        Personne au sein de l’OMS n’y aura accès. L’enquête n’enregistre aucune donnée personnelle.
+                        Toutes les réponses à l’enquête resteront strictement anonymes et confidentielles et seront regroupées afin de créer un aperçu de la culture organisationnelle au sein de l’OMS.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">d'accord</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Arabic")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">معلومات السرية</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="أغلق">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        يُدار هذا الاستبيان بواسطة مقدم خدمات خارجي: مركز المبادرات القيادية في آسيا (Center for Asia Leadership Initiatives) وشركة DEI Ready المتعاقدة معه
+                        سيوضع ملف البيانات خارج منظمة الصحة العالمية لدى مقدم الخدمات الخارجي على منصة منفصلة
+                        لن يكون في إمكان أحد في منظمة الصحة العالمية الوصول إليه لا يسجل الاستبيان أي بيانات شخصية
+                        ستظل جميع الإجابات على الاستبيان مجهولة الهوية وسرية تمامًا، وسيتم تجميعها لإنشاء لمحة عن الثقافة المؤسسية في منظمة الصحة العالمية
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">نعم</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Chinese")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">保密信息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        本调查由外部服务提供商管理：亚洲领导行动中心及其分包商 DEI Ready。
+                        数据文件将驻留在世界卫生组织的外部服务提供商的一个单独平台上。
+                        世界卫生组织内部的任何人都无法访问该平台。 本调查不会记录任何个人详细信息。
+                        对调查的所有答复将严格保持匿名和保密，并将进行汇总以构建世界卫生组织的组织文化快照。
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">好的</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Russian")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color:#000 !important;">Информация о конфиденциальности</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="ЗАКРЫТЬ">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 36vh !important;">
+                    <p align="justify" style="color:#000 !important;">
+                        Этот опрос проводит внешний поставщик услуг — Центр инициатив лидерства в Азии со своим субподрядчиком DEI Ready.
+                        Файл данных будет находиться за пределами ВОЗ, у внешнего поставщика услуг на отдельной платформе.
+                        Никто в ВОЗ не будет иметь к нему доступ. Никакие персональные данные, указанные в опросе, зарегистрированы не будут.
+                        Все ответы, данные в рамках опроса, останутся строго анонимными и конфиденциальными и будут объединены для получения среза информации о состоянии корпоративной культуры в ВОЗ.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">ХОРОШО</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<!-- End Confidential Modal -->
+
+
+<!-- Missing Value Modal Start -->
+
+<div class="modal fade" id="SurveySubmitted" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+
+            @if (ViewBag.lang == "English" || ViewBag.lang == "")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Note : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        Your answers to this survey have already been recorded.
+                        <h5 align="center"><strong>Thank you!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Portuguese")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Observação : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Perto">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        Suas respostas a esta pesquisa já foram registradas.
+                        <h5 align="center"><strong>Obrigada!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Spanish")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Nota : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="cerca">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        Sus respuestas a esta encuesta ya han sido registradas.
+                        <h5 align="center"><strong>Gracias!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">ACEPTAR</button>
+                </div>
+            }
+            @if (ViewBag.lang == "French")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Noter : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="proche">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        Vos réponses à cette enquête ont déjà été enregistrées.
+                        <h5 align="center"><strong>Merci!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">d'accord</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Arabic")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">ملحوظة : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="قريب">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        تم تسجيل إجاباتك على هذا الاستطلاع بالفعل.
+                        <h5 align="center"><strong>شكرًا لك!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">حسنًا</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Chinese")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">笔记 ： </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        您对此调查的回答已被记录。
+                        <h5 align="center"><strong>谢谢！</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">确定</button>
+                </div>
+            }
+            @if (ViewBag.lang == "Russian")
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Примечание:</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 45vh !important; overflow-y:hidden;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+                        Ваши ответы на этот опрос уже записаны.
+                        <h5 align="center"><strong>Благодарю вас!</strong></h5>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">хорошо</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- End Missing Value Modal -->
+
+
+<!-- Survey Closed Modal -->
+<div class="modal fade" id="SurveyClosed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="padding-right:0px !important;width:auto!important;">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:#000 !important;"><i class="fa fa-exclamation-triangle" style="color: #813588; font-size: 17px;"></i><span class="ml-2" style="font-size:16px;">Note : </span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color:#000 !important;">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" style="height: 70vh !important; overflow-y:scroll;">
+
+                    <div class="d-flex justify-content-center mb-3">
+                        <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+                    </div>
+
+                    <p align="center" style="color:#000 !important;">
+
+
+                        <h5 align="center"><strong class="mb-2">Thank you for your participation. The survey window is now closed.</strong></h5>
+                        <hr />
+
+
+
+
+                    </p>
+                    <h5 align="center"><strong class="mb-2"> L'enquête est maintenant terminée. Merci de votre participation.</strong></h5>
+                    <hr />
+                    <h5 align="center"><strong class="mb-2"> La encuesta está cerrada. Gracias por su participación.</strong></h5>
+                    <hr />
+                    <h5 align="center"><strong class="mb-2"> A sondagem está encerrada. Obrigado pela sua participação.</strong></h5>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-theme submit" data-dismiss="modal">OK</button>
+                </div>
+           
+        </div>
+    </div>
+</div>
+<!-- Survey Closed Modal -->
+
+
+<script>
+    
+    @*$(window).on('load', function () {
+        if ('@ViewBag.isSubmit' == "1") { 
+            $('#SurveySubmitted').modal('show'); 
+        }
+        //$("#btnclck").remove();
+        //$('#SurveyClosed').modal('show');
+    });
+
+    $('#alertMsg').fadeOut(9000);
+
+    if("@ViewBag.msg" == "The survey is now closed. Thank you for your participation.")
+    {
+        $("#btnclck").remove();
+        $('#SurveyClosed').modal('show');
+    }*@
+
+
+    function ChangeLanguage(value) {
+        if (value != "") {
+            $.ajax({
+                type: 'POST',
+                url: "../Home/CheckLanguage",
+                dataType: "json",
+                data: {
+                    lang: value
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function () {
+                    alert("ajax failed");
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+
+    //function ConfidentialInfo() {
+    //    $('#exampleModalCenter').modal('show');
+    //}
+
+
+    //$('#btnclck').click(function () {
+    //    var getval = $("#inlineFormCustomSelect1").find(":selected").text();
+    //    var Email = document.getElementById("Email").value;
+    //    var Passcode = document.getElementById("Passcode").value;
+    //    console.log(Email + " " + Passcode);
+    //    window.open('../Home/LandingPage?Lang=' + getval + '&Email=' + Email + '&Passcode=' + Passcode, "_parent");
+    //});
+
+</script>

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "WHO | Thank you Page";
+    Layout = "~/Views/Shared/_LandingPageLayout.cshtml";
+    //ViewBag.lang = ProjectVariables.lang;
+
+    //Get Cookies And Its Value
+    HttpCookie myCookie = Request.Cookies["LanguageCookie"];
+    if (myCookie != null)
+    {
+        ViewBag.lang = myCookie["lang"];
+    }
+}
+
+<!-- Thankyou-Section
+            ============================================= -->
+<section id="" class="bg-scroll division mt-5">
+
+    <div class="jumbotron text-center" style="margin-bottom: 0px !important;">
+        <div class="d-flex justify-content-center">
+            <lottie-player class="mobile-resize" src="https://assets9.lottiefiles.com/packages/lf20_pmdaorhc.json" background="transparent" speed="1" style="width: 150px; height: 150px;" autoplay></lottie-player>
+        </div>
+        @*@if (ViewBag.lang == "English" || ViewBag.lang == "")
+        {*@
+            <p class="lead">Your answers to this survey have been recorded.</p>
+            <h1 class="display-3">Thank You!</h1>
+
+           
+           
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">Continue to homepage</a>
+            </p>
+        @*}*@
+        @if (ViewBag.lang == "Portuguese")
+        {
+            <p class="lead">As suas respostas a este inquérito foram registadas.</p>
+            <h1 class="display-3">Obrigado!</h1>
+
+          
+          
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">Continue para a página inicial</a>
+            </p>
+        }
+        @if (ViewBag.lang == "Spanish")
+        {
+            <p class="lead">Sus respuestas a esta encuesta se han registrado.</p>
+            <h1 class="display-3">¡Gracias!</h1>
+
+           
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">Continua a la página de inicio</a>
+            </p>
+        }
+        @if (ViewBag.lang == "French")
+        {
+            <p class="lead">Vos réponses à l’enquête ont été enregistrées.</p>
+            <h1 class="display-3">Merci!</h1>
+
+         
+         
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">Continue à la page d'accueil</a>
+            </p>
+        }
+        @if (ViewBag.lang == "Arabic")
+        {
+            <p class="lead">تم تسجيل إجاباتك عن هذا الاستبيان.</p>
+            <h1 class="display-3">!شكرًا لك</h1>
+
+          
+         
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">المتابعة إلى الصفحة الرئيسية</a>
+            </p>
+        }
+        @if (ViewBag.lang == "Chinese")
+        {
+            <p class="lead">您对本次调查的回答已记录在案。</p>
+            <h1 class="display-3">谢谢！</h1>
+
+          
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">继续访问主页</a>
+            </p>
+        }
+        @if (ViewBag.lang == "Russian")
+        {
+            <p class="lead">Ваши ответы на этот опрос зарегистрированы.</p>
+            <h1 class="display-3">Спасибо!</h1>
+
+           
+            <p class="lead">
+                <a class="btn btn-submit btn-sm mt-4" href="../Home/LandingPage" role="button" style="color: #fff;">Перейти на домашнюю страницу</a>
+            </p>
+        }
+    </div>
+</section>	<!-- END Thankyou-Section -->	

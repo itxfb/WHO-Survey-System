@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Add User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@*<div class="modal fade" id="updateModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-center text-bold">Update User</h5>
+                    <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="create-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="control-label">
+                                Upload File:
+                            </label>
+                            <input id="batchUsers" name="batchUsers" class="form-control" type="file" tabindex="14">
+                            <span class="form-text text-muted">Allowed file types:  xlsx, xls.</span>
+                        </div>
+                        <div class="card-footer">
+                            <center>
+                                <button type="submit" class="btn btn-primary mr-2">Upload Users</button>
+                                <a class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+<div class="row" style="min-height:700px;">
+    <br />
+    <br />
+    <form action="@Url.Action("PostAddUser", "Admin")" method="post">
+        <div class="row m-10">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <div class="text-left" style="color: @ViewBag.Color; font-size:15px;" id="alertMsg">
+                            @ViewBag.Message
+                        </div>
+                        <h4 class="panel-title" align="center"><b><u>Add New User</u></b></h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="text-bold">First Name<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter Your First Name" required name="FirstName">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-bold">Last Name<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter Your Last Name" required name="LastName">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-bold">Email<span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" placeholder="Enter Your Valid Email Here" required name="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-bold">Password<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Password" required name="Password">
+                        </div>
+
+                        @*<div class="form-group">
+                                <label for="modal-Type" class="col-form-label text-bold">Institute</label>
+                                <select class="form-control selectpicker" tabindex="-1" aria-hidden="true" name="SurveyId" id="modal-Type">
+                                    <option value="" disabled selected>Select Institute</option>
+                                    @foreach (var item in ViewBag.institutelist)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                <label for="select-institute" class="col-form-label text-bold">Institute<span class="text-danger">*</span></label>
+
+                                <select class="form-control selectpicker" id="select-institute" name="InstituteId" data-live-search="true" required>
+                                    <option value="" disabled selected>Select Institute</option>
+                                    @foreach (var item in ViewBag.institutelist)
+                                     {
+                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                     }
+                                </select>
+                            </div>*@
+
+                        <div class="text-right">
+                            @*<a class="btn btn-primary pull-left" data-toggle="modal" data-target="#updateModal">
+                                    Import From Excel
+                                </a>*@
+                            <button type="submit" class="btn btn-primary" id="sub"><i class="fa fa-plus fa-solid"></i>&nbsp;&nbsp;&nbsp;Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker();
+    });
+</script>
+
+
